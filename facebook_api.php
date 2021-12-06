@@ -96,7 +96,9 @@
                 }
                 //gets id of logged in user
                 $id = $rs->fetch_assoc();
-                $_SESSION['id'] = $id['id'];
+                $_SESSION['userid'] = $id['id'];
+
+                echo $_SESSION['userid'];
                 //indicates that a user is logged in
                 $_SESSION['is_logged_in'] = true;
             }

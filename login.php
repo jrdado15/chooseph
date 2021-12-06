@@ -6,7 +6,7 @@
 
     }
     //Restricts user from going back to login page if logged in
-    if(isset($_SESSION['id'])){
+    if(isset($_SESSION['userid'])){
         header('location: homepage.php');
         exit();
     }

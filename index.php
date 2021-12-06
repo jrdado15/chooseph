@@ -2,12 +2,12 @@
 session_start();
 
 //KUNWARE HOMEPAGE TO MGA BOBO
-echo $_SESSION['id'];
+echo $_SESSION['userid'];
 
 //Restricts user from going back to login page if logged in
-if(!isset($_SESSION['id'])){
-    // header('location: login.php');
-    // exit();
+if(!isset($_SESSION['userid'])){
+    header('location: login.php');
+    exit();
 }
 
 ?>
