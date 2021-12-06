@@ -21,7 +21,7 @@
 		);
 	}
     
-    
+
     function getFacebookLoginUrl(){
         $endpoint = 'https://www.facebook.com/'.FB_GRAPH_VERSION.'/dialog/oauth';
         
@@ -62,6 +62,7 @@
 
 
     function tryAndLoginWithFacebook( $get ) {
+        include 'db_config.php';
 		// assume fail
 		$status = 'fail';
 		$message = '';
@@ -79,10 +80,25 @@
                 $_SESSION['fb_access_token'] = $accessTokenInfo['fb_response']['access_token'];
            
                 $fbUserInfo = getFacebookUserInfo( $_SESSION['fb_access_token']);
-            
-                echo '<pre>';
-                print_r($fbUserInfo);
-                die();
+
+                $email = $fbUserInfo['fb_response']['email'];
+                $fname = $fbUserInfo['fb_response']['first_name'];
+                $lname = $fbUserInfo['fb_response']['last_name'];   
+
+                //check if user is already signed up
+                $sql = "SELECT * FROM users WHERE email='$email'";
+                $rs = $conn->query($sql);
+                if(!mysqli_num_rows($rs) >= 1){
+                    $sql = "INSERT INTO users SET email='$email', first_name='$fname', last_name='$lname'";
+                    if(!$conn->query($sql)){
+                        echo $conn->error;//getting the error
+                    }
+                }
+                //gets id of logged in user
+                $id = $rs->fetch_assoc();
+                $_SESSION['id'] = $id['id'];
+                //indicates that a user is logged in
+                $_SESSION['is_logged_in'] = true;
             }
         }
 
