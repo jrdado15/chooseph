@@ -62,7 +62,7 @@
 
 
     function tryAndLoginWithFacebook( $get ) {
-        include 'db_config.php';
+        include 'dbconfig.php';
 		// assume fail
 		$status = 'fail';
 		$message = '';
@@ -86,7 +86,7 @@
                 $lname = $fbUserInfo['fb_response']['last_name'];   
 
                 //check if user is already signed up
-                $sql = "SELECT * FROM users WHERE email='$email'";
+                $sql = "SELECT * FROM users_profile WHERE email='$email'";
                 $rs = $conn->query($sql);
                 if(!mysqli_num_rows($rs) >= 1){
                     $sql = "INSERT INTO users SET email='$email', first_name='$fname', last_name='$lname'";
@@ -96,7 +96,7 @@
                 }
                 //gets id of logged in user
                 $id = $rs->fetch_assoc();
-                $_SESSION['userid'] = $id['id'];
+                $_SESSION['userid'] = $id['email'];
 
                 echo $_SESSION['userid'];
                 //indicates that a user is logged in

@@ -2,12 +2,12 @@
     include_once 'autoloader.php';
 
     if(isset($_GET['state']) && FB_APP_STATE == $_GET['state']){ 
-          $fbLogin = tryAndLoginWithFacebook( $_GET);
-
+        $fbLogin = tryAndLoginWithFacebook( $_GET);
     }
+
     //Restricts user from going back to login page if logged in
     if(isset($_SESSION['userid'])){
-        header('location: homepage.php');
+        header('location: index.php');
         exit();
     }
 ?>
