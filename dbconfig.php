@@ -1,10 +1,10 @@
 <?php
-$server="localhost";//server name
-$user="root";		//user name
-$pass="";			//user password
-$db_name="chooseph";//database name
-$conn= new mysqli($server,$user,$pass,$db_name);
-if($conn->connect_error){
-    die('Connection Failed'.$conn->connect_error);
-}
+    $server = "localhost";
+    $user = "root";
+    $pass = "";
+    $db_name = "chooseph";
+    $conn = mysqli_connect($server, $user, $pass, $db_name);
+    if(!$conn){
+        echo "Database connection error" . mysqli_connect_error();
+    }
 ?>
