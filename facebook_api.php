@@ -78,9 +78,8 @@
                     }
                 }
                 //gets id of logged in user
-                $id = $rs->fetch_assoc();
-                $_SESSION['userid'] = $id['email'];
-                $_SESSION['name'] = $id['first_name'] . ' ' . $id['last_name'];
+                $_SESSION['userid'] = $email;
+                $_SESSION['name'] = "$fname $lname";
                 //indicates that a user is logged in
                 $_SESSION['is_logged_in'] = true;
             }

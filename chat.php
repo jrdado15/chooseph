@@ -27,10 +27,10 @@
           if($sql->num_rows > 0) {
             $row = $sql->fetch_assoc();
           } else {
-            header("location: index.php");
+            header("location: index.php?min-age=18&max-age=70&sexSelect=Everything&btnSubmit=SUBMIT");
           }
         ?>
-        <a href="index.php" class="back-icon"><i class="fas fa-arrow-left"></i></a>
+        <a href="index.php?min-age=18&max-age=70&sexSelect=Everything&btnSubmit=SUBMIT" class="back-icon"><i class="fas fa-arrow-left"></i></a>
         <img class="img-fluid rounded-circle z-depth-2" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" data-holder-rendered="true">
         <div class="details">
           <span><?php echo $row['first_name']. " " . $row['last_name'] ?></span>
