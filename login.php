@@ -1,13 +1,11 @@
 <?php
     include_once 'autoloader.php';
-
     if(isset($_GET['state']) && FB_APP_STATE == $_GET['state']){ 
         $fbLogin = tryAndLoginWithFacebook( $_GET);
     }
-
     //Restricts user from going back to login page if logged in
     if(isset($_SESSION['userid'])){
-        header('location: index.php?min-age=18&max-age=70&sexSelect=Everything&btnSubmit=SUBMIT');
+        header('location: register.php');
         exit();
     }
 ?>

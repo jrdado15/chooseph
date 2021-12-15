@@ -12,6 +12,20 @@
             while($row = $query->fetch_assoc()) {
                 if ($row['unique_id1'] == $_SESSION['userid']){
                     $matched_user = $row['unique_id2'];
+                    $idSql="SELECT * FROM users_profile WHERE email = '$matched_user'";
+                    $idArray = array();
+                    $idQuery = $conn->query($idSql);
+                    while($idRow = $idQuery->fetch_assoc()) {
+                        $idArray = $idRow;
+                    }
+                    $imageId = $idArray['pub_id'];
+                    $imageSql="SELECT * FROM public_record WHERE pub_id = '$imageId'";
+                    $imageArray = array();
+                    $imageQuery = $conn->query($imageSql);
+                    while($imageRow = $imageQuery->fetch_assoc()) {
+                        $imageArray = $imageRow;
+                    }
+                    $imageArray = explode(',', $imageArray['pub_img']);
                     $sql2 = "SELECT * FROM users_profile WHERE email = '$matched_user'";
                     $query2 = $conn->query($sql2);
                     while($row2 = $query2->fetch_assoc()) {
@@ -19,7 +33,7 @@
                                         <div class="row align-items-center mb-3">
                                             <div class="col-4">
                                                 <span class="img-responsive">
-                                                    <img class="img-fluid rounded-circle z-depth-2" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" data-holder-rendered="true">
+                                                    <img class="img-fluid rounded-circle z-depth-2" alt="" src="images/' . $imageArray[0] . '" data-holder-rendered="true">
                                                 </span>
                                             </div>
                                             <div class="col-8">  
@@ -30,6 +44,20 @@
                     } 
                 } elseif ($row['unique_id2'] == $_SESSION['userid']){
                     $matched_user = $row['unique_id1'];
+                    $idSql="SELECT * FROM users_profile WHERE email = '$matched_user'";
+                    $idArray = array();
+                    $idQuery = $conn->query($idSql);
+                    while($idRow = $idQuery->fetch_assoc()) {
+                        $idArray = $idRow;
+                    }
+                    $imageId = $idArray['pub_id'];
+                    $imageSql="SELECT * FROM public_record WHERE pub_id = '$imageId'";
+                    $imageArray = array();
+                    $imageQuery = $conn->query($imageSql);
+                    while($imageRow = $imageQuery->fetch_assoc()) {
+                        $imageArray = $imageRow;
+                    }
+                    $imageArray = explode(',', $imageArray['pub_img']);
                     $sql2 = "SELECT * FROM users_profile WHERE email = '$matched_user'";
                     $query2 = $conn->query($sql2);
                     while($row2 = $query2->fetch_assoc()) {
@@ -37,7 +65,7 @@
                                         <div class="row align-items-center mb-3">
                                             <div class="col-4">
                                                 <span class="img-responsive">
-                                                    <img class="img-fluid rounded-circle z-depth-2" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" data-holder-rendered="true">
+                                                    <img class="img-fluid rounded-circle z-depth-2" alt="" src="images/' . $imageArray[0] . '" data-holder-rendered="true">
                                                 </span>
                                             </div>
                                             <div class="col-8">  

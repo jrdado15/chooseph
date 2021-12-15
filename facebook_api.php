@@ -80,6 +80,7 @@
                 //gets id of logged in user
                 $_SESSION['userid'] = $email;
                 $_SESSION['name'] = "$fname $lname";
+                $_SESSION['fname'] = $fname;
                 //indicates that a user is logged in
                 $_SESSION['is_logged_in'] = true;
             }

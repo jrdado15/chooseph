@@ -23,6 +23,20 @@
       <header>
         <?php
           $chatid = $conn->real_escape_string($_GET['chatid']);
+          $idSql="SELECT * FROM users_profile WHERE email = '$chatid'";
+          $idArray = array();
+          $idQuery = $conn->query($idSql);
+          while($idRow = $idQuery->fetch_assoc()) {
+              $idArray = $idRow;
+          }
+          $imageId = $idArray['pub_id'];
+          $imageSql="SELECT * FROM public_record WHERE pub_id = '$imageId'";
+          $imageArray = array();
+          $imageQuery = $conn->query($imageSql);
+          while($imageRow = $imageQuery->fetch_assoc()) {
+              $imageArray = $imageRow;
+          }
+          $imageArray = explode(',', $imageArray['pub_img']);
           $sql = $conn->query("SELECT * FROM users_profile WHERE email = '$chatid'");
           if($sql->num_rows > 0) {
             $row = $sql->fetch_assoc();
@@ -31,7 +45,7 @@
           }
         ?>
         <a href="index.php?min-age=18&max-age=70&sexSelect=Everything&btnSubmit=SUBMIT" class="back-icon"><i class="fas fa-arrow-left"></i></a>
-        <img class="img-fluid rounded-circle z-depth-2" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" data-holder-rendered="true">
+        <img class="img-fluid rounded-circle z-depth-2" alt="" src="images/<?php echo $imageArray[0];?>" data-holder-rendered="true">
         <div class="details">
           <span><?php echo $row['first_name']. " " . $row['last_name'] ?></span>
         </div>

@@ -17,7 +17,6 @@
                                 </div>';
                 } else {
                     $output .= '<div class="chat incoming">
-                                    <img class="img-fluid rounded-circle z-depth-2" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" data-holder-rendered="true">
                                     <div class="details">
                                         <p>'. $row['msg'] .'</p>
                                     </div>

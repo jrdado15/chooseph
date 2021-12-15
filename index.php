@@ -7,6 +7,25 @@
     header('location: login.php');
     exit();
   }
+  //Gets you public id
+  $idEmail = $_SESSION['userid'];
+  $idSql="SELECT * FROM users_profile WHERE email = '$idEmail'";
+  $idArray = array();
+  $idQuery = $conn->query($idSql);
+  while($idRow = $idQuery->fetch_assoc()) {
+      $idArray = $idRow;
+  }
+  //Gets your image list
+  $imageId = $idArray['pub_id'];
+  $imageSql="SELECT * FROM public_record WHERE pub_id = '$imageId'";
+  $imageArray = array();
+  $imageQuery = $conn->query($imageSql);
+  while($imageRow = $imageQuery->fetch_assoc()) {
+      $imageArray = $imageRow;
+  }
+  //Turns comma list into array
+  $imageArray = explode(',', $imageArray['pub_img']);
+  //print_r($imageArray);
 
   $curr_data = array();
   $likedUsersEmail = array();
@@ -91,7 +110,7 @@
       
       <div class="col-3">
       <div class="card" style="width: 18rem; height: 100%">
-        <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" class="profile-cover" alt="...">
+        <img src="images/<?php echo $imageArray[0];?>" id="userPic" class="profile-cover" alt="...">
         <div class="card-body">
           <h5 class="card-title h2 mb-4"><?php echo $_SESSION['name']?></h5>
           <div class="btn-group d-flex" role="group" aria-label="...">
@@ -110,7 +129,10 @@
       </div>
       <div class="col-9 justify-content-center text-center relative-full-div">
         <div class="card mt-4 mb-4 ">
-          <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" class="date-cover" alt="...">
+          <img src="" id="img1" class="profile-cover" alt="..." style="">
+          <img src="" id="img2" class="profile-cover" alt="..." style="">
+          <img src="" id="img3" class="profile-cover" alt="..." style="">
+          <img src="" id="img4" class="profile-cover" alt="..." style="">
           <div class="card card-body">       
             <input type="hidden" id="person-email" value=""> 
             <h5 id="person-name" class="card-title h3"> MissingNO </h5>
@@ -160,6 +182,10 @@
           <h5 class="modal-title" id="person-name-modal">MissingNO</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <img src="" id="mimg1" class="profile-cover" alt="..." style="">
+        <img src="" id="mimg2" class="profile-cover" alt="..." style="">
+        <img src="" id="mimg3" class="profile-cover" alt="..." style="">
+        <img src="" id="mimg4" class="profile-cover" alt="..." style="">
         <div class="modal-body" id="description-modal">
         ???
         </div>
@@ -183,6 +209,14 @@
       const matchDiv = document.getElementById("matches-div");
       const chatBtn = document.getElementById("conversations-toggle");
       const matchBtn = document.getElementById("matches-toggle");
+      const img1 = document.getElementById('img1');
+      const img2 = document.getElementById('img2');
+      const img3 = document.getElementById('img3');
+      const img4 = document.getElementById('img4');
+      const mimg1 = document.getElementById('mimg1');
+      const mimg2 = document.getElementById('mimg2');
+      const mimg3 = document.getElementById('mimg3');
+      const mimg4 = document.getElementById('mimg4');
       var currData = [];
       var currFlag = 0;
       var sameData = true;
@@ -219,7 +253,20 @@
       function viewUser(flag){
         document.getElementById('person-name').innerHTML = currData[flag]['pub_name'];
         document.getElementById('description').innerHTML = currData[flag]['pub_desc'];
+        var arr = currData[flag]['pub_img'].split(',');
+        img1.src = 'images/' + arr[0];
+        img2.src = 'images/' + arr[1];
+        img3.src = 'images/' + arr[2];
+        img4.src = 'images/' + arr[3];
         sameData = true;
+        if(img1.src == "http://localhost/chooseph/images/")
+          img1.style.display='none';
+        if(img2.src == "http://localhost/chooseph/images/")
+          img2.style.display='none';
+        if(img3.src == "http://localhost/chooseph/images/")
+          img3.style.display='none';
+        if(img4.src == "http://localhost/chooseph/images/")
+          img4.style.display='none';
       }
       function passUser(type){
         if(type == 0){
@@ -234,6 +281,19 @@
             }
             document.getElementById('person-name').innerHTML = currData[currFlag]['pub_name'];
             document.getElementById('description').innerHTML = currData[currFlag]['pub_desc'];
+            var arr = currData[currFlag]['pub_img'].split(',');
+            img1.src = 'images/' + arr[0];
+            img2.src = 'images/' + arr[1];
+            img3.src = 'images/' + arr[2];
+            img4.src = 'images/' + arr[3];
+            if(img1.src == "http://localhost/chooseph/images/")
+              img1.style.display='none';
+            if(img2.src == "http://localhost/chooseph/images/")
+              img2.style.display='none';
+            if(img3.src == "http://localhost/chooseph/images/")
+              img3.style.display='none';
+            if(img4.src == "http://localhost/chooseph/images/")
+              img4.style.display='none';
           }
         } else {
           //from matches modal 
@@ -252,6 +312,19 @@
             }
             document.getElementById('person-name').innerHTML = currData[currFlag]['pub_name'];
             document.getElementById('description').innerHTML = currData[currFlag]['pub_desc'];
+            var arr = currData[currFlag]['pub_img'].split(',');
+            img1.src = 'images/' + arr[0];
+            img2.src = 'images/' + arr[1];
+            img3.src = 'images/' + arr[2];
+            img4.src = 'images/' + arr[3];
+            if(img1.src == "http://localhost/chooseph/images/")
+              img1.style.display='none';
+            if(img2.src == "http://localhost/chooseph/images/")
+              img2.style.display='none';
+            if(img3.src == "http://localhost/chooseph/images/")
+              img3.style.display='none';
+            if(img4.src == "http://localhost/chooseph/images/")
+              img4.style.display='none';
           }
         } else {
           //from matches modal
@@ -262,14 +335,27 @@
         let element = document.getElementById(id);
         element.value = valueToSelect;
       } 
-      function matchClicked(){
-        email = document.getElementById("matchesEmail").value;
-        publicName = document.getElementById("matchesPublicName").value;
-        publicDesc = document.getElementById("matchesPublicDesc").value;
+      function matchClicked(flag){
+        email = document.getElementById("matchesEmail"+flag).value;
+        publicName = document.getElementById("matchesPublicName"+flag).value;
+        publicImage = document.getElementById("matchesPublicImage"+flag).value;
+        publicDesc = document.getElementById("matchesPublicDesc"+flag).value;
         document.getElementById('person-name-modal').innerHTML = publicName;
+        var arr = publicImage.split(',');
+        mimg1.src = 'images/' + arr[0];
+        mimg2.src = 'images/' + arr[1];
+        mimg3.src = 'images/' + arr[2];
+        mimg4.src = 'images/' + arr[3];
+        if(mimg1.src == "http://localhost/chooseph/images/")
+          mimg1.style.display='none';
+        if(mimg2.src == "http://localhost/chooseph/images/")
+          mimg2.style.display='none';
+        if(mimg3.src == "http://localhost/chooseph/images/")
+          mimg3.style.display='none';
+        if(mimg4.src == "http://localhost/chooseph/images/")
+          mimg4.style.display='none';
         document.getElementById('description-modal').innerHTML = publicDesc;
       }
-      
     </script>
     <script src="conversations.js"></script>
     <script src="matches.js"></script>
@@ -306,7 +392,8 @@
     
     $sql = "DELETE FROM match_record WHERE unique_id1 = '$emailLiker' AND unique_id2 = '$userEmail'";
     if ($conn->query($sql)) {
-      echo "<script> alert('Record updated successfully') </script>";
+      //echo "<script> alert('Record updated successfully') </script>";
+      header('location: index.php?min-age=18&max-age=70&sexSelect=Everything&btnSubmit=SUBMIT');
     } else {
       echo "<script> alert('Error updating record:'". $conn->error .") </script> " ;
     }
@@ -318,7 +405,8 @@
     
     $sql = "UPDATE match_record SET match_status = 'matched' WHERE unique_id1 = '$emailLiker' AND unique_id2 = '$userEmail'";
     if ($conn->query($sql)) {
-      echo "<script> alert('Record updated successfully') </script>";
+      // echo "<script> alert('Record updated successfully') </script>";
+      header('location: index.php?min-age=18&max-age=70&sexSelect=Everything&btnSubmit=SUBMIT');
     } else {
       echo "<script> alert('Error updating record:'". $conn->error .") </script> " ;
     }
