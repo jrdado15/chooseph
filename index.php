@@ -34,11 +34,15 @@
 
   if(isset($_GET['btnSubmit'])) {
     $email = $_SESSION['userid'];
-    $sql3 = "SELECT * FROM match_record WHERE unique_id1 = '$email'";
+    $sql3 = "SELECT * FROM match_record WHERE unique_id1 = '$email' OR unique_id2 = '$email'";
     $query3 = $conn->query($sql3);
     $counter = 0;
     while($row3 = $query3->fetch_assoc()) {
-      $likedUsersEmail[$counter] = $row3['unique_id2'];
+      if ($email == $row3['unique_id1']){
+        $likedUsersEmail[$counter] = $row3['unique_id2'];
+      } elseif ($email == $row3['unique_id2']){
+        $likedUsersEmail[$counter] = $row3['unique_id1'];
+      }
       $counter++;
     }
     $counter = 0;
