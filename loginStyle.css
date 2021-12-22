@@ -1,0 +1,28 @@
+@import "https://fonts.googleapis.com/css2?family=Quicksand&display=swap";
+
+body, html{
+    font-family: 'Quicksand', sans-serif;
+    height: 100%;
+}
+
+body {
+    background-color: #0ba8d3;
+}
+
+div {
+    display: block;
+}
+
+a {
+    background-color: #1c24f5;
+    color: white;
+}
+
+a:hover {
+    color:#0ba8d3;
+}
+
+.card {
+     border-color: #0ba8d3;
+     background-color: #0ba8d3;
+}
