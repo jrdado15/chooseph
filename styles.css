@@ -1,3 +1,25 @@
+@import "https://fonts.googleapis.com/css2?family=Quicksand&display=swap";
+
+body, html{
+    font-family: 'Quicksand', sans-serif;
+    height: 100%;
+}
+
+body {
+    background-color: #fafafa;
+}
+
+div {
+    display: block;
+}
+
+.card {
+    
+    background-color: #ffffff;
+}
+
+
+
 .full-div {
     position: absolute;
     min-height: 100%;
