@@ -7,6 +7,13 @@
     header('location: login.php');
     exit();
   }
+
+  $email = $_SESSION['userid'];
+  $check="SELECT * FROM users_profile WHERE email='$email' AND pub_id=0 LIMIT 1";
+  if($conn->query($check)->num_rows > 0) {
+    header('location: register.php');
+    exit();
+  }
   //Gets you public id
   $idEmail = $_SESSION['userid'];
   $idSql="SELECT * FROM users_profile WHERE email = '$idEmail'";
@@ -104,19 +111,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/21ed7fc1ee.js" crossorigin="anonymous"></script>
   </head>
   <body>
+  
     
-    <div class="row container-fluid">
-      
-      <div class="col-3">
+    <div class="row mt-3 container-fluid">
+      <!-- SIDEBAR START -->
+      <div class="col-3 mt-3">
       <div class="card" style="width: 18rem; height: 100%">
         <img src="images/<?php echo $imageArray[0];?>" id="userPic" class="profile-cover" alt="...">
         <div class="card-body">
           <h5 class="card-title h2 mb-4"><?php echo $_SESSION['name']?></h5>
+          <!--START Temporary Age Range and Sex for showing date potentials -->
+          <div class="mb-2">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#filter" aria-expanded="false">
+                Filters
+            </button>
+            <div class="collapse" id="filter">
+              <div class="card card-body">
+              <form name="form" method="GET" action="index.php">
+                <div class="input-group">
+                    <input id="min-age" name="min-age" class="form-control" type="text" placeholder="Default input">
+                    <script type="text/javascript">
+                    document.getElementById('min-age').value = '18';
+                    </script>
+                    <input id="max-age" name="max-age" class="form-control" type="text" placeholder="Default input">
+                    <script type="text/javascript">
+                      document.getElementById('max-age').value = '70';
+                    </script>
+                    <div class="input-group-append">
+                    <select class="btn custom-select" id="sexSelect" name="sexSelect" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option selected value="Everything">Everything</option>
+                    </select> 
+                    <input class="btn btn-primary" type="submit" name="btnSubmit" value="SUBMIT"/> <br/>
+                  </div>
+                </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!--END Temporary -->
           <div class="btn-group d-flex" role="group" aria-label="...">
             <button id="conversations-toggle" type="button" class="btn btn-primary w-100">Conversations</button>
             <button id="matches-toggle" type="button" class="btn btn-primary w-100">Matches</button>
@@ -126,57 +167,45 @@
           <!--END -->
           <!--START Users Matches -->
           <div id="matches-div" class="matches-list card-body" style="display:none; max-height:20rem; overflow-y:scroll"></div>
-          
           <!--END -->
+          <a href="logout.php?logout_id=<?php echo $_SESSION['userid']; ?>" class="btn btn-primary">Logout</a>
         </div>
       </div>
       </div>
-      <div class="col-9 justify-content-center text-center relative-full-div">
-        <div class="card mt-4 mb-4 ">
-          <img src="" id="img1" class="profile-cover" alt="..." style="">
-          <img src="" id="img2" class="profile-cover" alt="..." style="">
-          <img src="" id="img3" class="profile-cover" alt="..." style="">
-          <img src="" id="img4" class="profile-cover" alt="..." style="">
-          <div class="card card-body">       
-            <input type="hidden" id="person-email" value=""> 
-            <h5 id="person-name" class="card-title h3"> MissingNO </h5>
-            <p id="description" class="card-text h5"> ??? </p>  
-            <!--START Temporary Age Range and Sex for showing date potentials -->
-            <form name="form" method="GET" action="index.php">
-            <input id="min-age" name="min-age" class="form-control" type="text" placeholder="Default input">
-            <script type="text/javascript">
-              document.getElementById('min-age').value = '18';
-            </script>
-            <input id="max-age" name="max-age" class="form-control" type="text" placeholder="Default input">
-            <script type="text/javascript">
-              document.getElementById('max-age').value = '70';
-            </script>
-            <select id="sexSelect" name="sexSelect" class="form-select form-select-sm" aria-label=".form-select-sm example">
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option selected value="Everything">Everything</option>
-            </select> 
-            <input type="submit" name="btnSubmit" value="SUBMIT"/> <br/>
-            </form>
-            <!--END Temporary -->
-            
-            
-            <div class="row mt-auto">
-              <span class="col-5"></span>
-              <span class="col-1"><input type="submit" value="PASS" name="passBtn0" href="#" onclick="passUser(0)"></span>
-              <span class="col-1">
-                <form name="form" method="GET" action="index.php">
-                  <input type="submit" value="SMASH" name="smashBtn0" href="#" onclick="smashUser(0)">
-                </form>
-              </span>
-              <span class="col-5"></span>
-            </div>
-            
+      <!-- SIDEBAR END -->
 
+
+      <!-- RIGHT PANEL START -->
+        <div class="col-9 justify-content-center text-center relative-full-div">
+        <div class="card">
+          <div class="row m-3">
+            <div class="col-6">
+            <img src="" id="img1" class="profile-cover" alt="..." style="">
+            <img src="" id="img2" class="profile-cover" alt="..." style="">
+            <img src="" id="img3" class="profile-cover" alt="..." style="">
+            <img src="" id="img4" class="profile-cover" alt="..." style="">
+            </div>
+            <div class="col-6">
+            <input type="hidden" id="person-email" value="">
+              <h5 id="person-name" class="card-title h3"> MissingNO, </h5>
+              <h5 id="person-age"> ##</h5> 
+              <p id="person-sex"> ??</p>
+              <p id="description" class="card-text h5"> ??? </p>  
+              <div class="row mt-auto justify-content-center">
+                    <button type="submit" class=" btn btn-info btn-light m-2 p-3 " value="PASS" name="passBtn0" href="#" onclick="passUser(0)" style="border-style: solid; border-color: #c8d6e5; border-radius: 50%;">
+                    <img src="images/cross.png" alt="" style="width: 50px;">
+                    </button>
+                  <form name="form" method="GET" action="index.php">
+                    <button type="submit" class="btn btn-light m-2 p-3 " value="SMASH" name="smashBtn0" href="#" onclick="smashUser(0)" style="border-style: solid; border-color: #c8d6e5; border-radius: 50%;">
+                    <img src="images/heart.png" alt="" style="width: 50px;">
+                    </button>
+                  </form>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <a href="logout.php?logout_id=<?php echo $_SESSION['userid']; ?>">Logout</a>
+        </div>
+      <!-- RIGHT PANEL END --> 
 
     <!-- Modal -->
     <div class="modal fade" id="matchesModal" tabindex="-1">
@@ -256,6 +285,8 @@
       }
       function viewUser(flag){
         document.getElementById('person-name').innerHTML = currData[flag]['pub_name'];
+        document.getElementById('person-age').innerHTML = currData[flag]['pub_age'];
+        document.getElementById('person-sex').innerHTML = currData[flag]['pub_sex'];
         document.getElementById('description').innerHTML = currData[flag]['pub_desc'];
         var arr = currData[flag]['pub_img'].split(',');
         img1.src = 'images/' + arr[0];
@@ -284,6 +315,8 @@
               currFlag += 1;
             }
             document.getElementById('person-name').innerHTML = currData[currFlag]['pub_name'];
+            document.getElementById('person-age').innerHTML = currData[currflag]['pub_age'];
+            document.getElementById('person-sex').innerHTML = currData[currflag]['pub_sex'];
             document.getElementById('description').innerHTML = currData[currFlag]['pub_desc'];
             var arr = currData[currFlag]['pub_img'].split(',');
             img1.src = 'images/' + arr[0];
@@ -315,6 +348,8 @@
               currFlag += 1;
             }
             document.getElementById('person-name').innerHTML = currData[currFlag]['pub_name'];
+            document.getElementById('person-age').innerHTML = currData[currflag]['pub_age'];
+            document.getElementById('person-sex').innerHTML = currData[currflag]['pub_sex'];
             document.getElementById('description').innerHTML = currData[currFlag]['pub_desc'];
             var arr = currData[currFlag]['pub_img'].split(',');
             img1.src = 'images/' + arr[0];
@@ -363,6 +398,10 @@
     </script>
     <script src="conversations.js"></script>
     <script src="matches.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
   </body>
 </html>
 
