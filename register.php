@@ -7,8 +7,8 @@
   }
   $name = $_SESSION['fname'];
   $email = $_SESSION['userid'];
-  $check="SELECT * FROM public_record WHERE pub_name='$name' LIMIT 1";
-  if($conn->query($check)->num_rows > 0) {  
+  $check="SELECT * FROM users_profile WHERE email='$email' AND pub_id=0 LIMIT 1";
+  if($conn->query($check)->num_rows == 0) {  
     header('location: index.php?min-age=18&max-age=70&sexSelect=Everything&btnSubmit=SUBMIT');
     exit();
   }
@@ -34,21 +34,17 @@
       echo $conn->error;
     } else {
       $last_id = $conn->insert_id;
-      $sql2 = "SELECT * FROM users_profile WHERE email='$email'";
-      $q = $conn->query($sql2);
-      if(mysqli_num_rows($q) == 1) {
-        $sql3="UPDATE users_profile SET pub_id='$last_id'";
-        if($conn->query($sql3)) {
-          for($i=0;$i<4;$i++) {
-            $tmpFilePath = $_FILES['img']['tmp_name'][$i];
-            if($tmpFilePath!="") {
-              $newFilePath = "images/" . time() . '_' . $img[$i];
-              move_uploaded_file($tmpFilePath, $newFilePath);
-            }
+      $sql2="UPDATE users_profile SET pub_id='$last_id' WHERE email='$email'";
+      if($conn->query($sql2)) {
+        for($i=0;$i<4;$i++) {
+          $tmpFilePath = $_FILES['img']['tmp_name'][$i];
+          if($tmpFilePath!="") {
+            $newFilePath = "images/" . time() . '_' . $img[$i];
+            move_uploaded_file($tmpFilePath, $newFilePath);
           }
-          header('location: index.php?min-age=18&max-age=70&sexSelect=Everything&btnSubmit=SUBMIT');
-          exit();
         }
+        header('location: index.php?min-age=18&max-age=70&sexSelect=Everything&btnSubmit=SUBMIT');
+        exit();
       }
     }
   }
@@ -65,29 +61,29 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://kit.fontawesome.com/21ed7fc1ee.js" crossorigin="anonymous"></script>
 </head>
-<body>
-        <div class="container d-flex justify-content-center align-items-center">
-                <div class="card text-center" style="width: 500px;">
+<body style="background-color: #0ba8d3;">
+        <div class="container d-flex justify-content-center align-items-center mt-3">
+                <div class="card text-center" style="width: 750px;">
                         <div class="card-body">
                         <form name="register" method="post" enctype="multipart/form-data">
                         <h3>Welcome, <?php echo $_SESSION['name'];?><br></h3>
                         <p>To get started, please upload at least one (1) picture.</p>
                         <hr>
                         <div class="btn btn-outline-secondary btn-rounded m-2">
-                        <img src="images\addImage.png" id="profileImage" style="width:100px;">
-                        <input class="d-none" type="file" name="img[]" id="imageUpload" accept="image/*" required>
+                        <img class="profile-cover" src="images\addImage.png" id="profileImage" style="width:200px;">
+                        <input class="d-none" type="file" name="img[]" id="imageUpload" accept="image/*"  required>
                         </div>
                         <div class="btn btn-outline-secondary btn-rounded m-2">
-                        <img src="images\addImage.png" id="profileImage2" style="width:100px;">
-                        <input class="d-none" type="file" name="img[]" id="imageUpload2" accept="image/*" required>
+                        <img  class="profile-cover" src="images\addImage.png" id="profileImage2" style="width:200px;">
+                        <input class="d-none" type="file" name="img[]" id="imageUpload2" accept="image/*">
                         </div> <br>
                         <div class="btn btn-outline-secondary btn-rounded m-2">
-                        <img src="images\addImage.png" id="profileImage3" style="width:100px;">
-                        <input class="d-none" type="file" name="img[]" id="imageUpload3" accept="image/*" required>
+                        <img  src="images\addImage.png" id="profileImage3" style="width:200px;">
+                        <input class="d-none" type="file" name="img[]" id="imageUpload3" accept="image/*">
                         </div>
                         <div class="btn btn-outline-secondary btn-rounded m-2">
-                        <img src="images\addImage.png" id="profileImage4" style="width:100px;">
-                        <input class="d-none" type="file" name="img[]" id="imageUpload4" accept="image/*" required>
+                        <img src="images\addImage.png" id="profileImage4" style="width:200px;">
+                        <input class="d-none" type="file" name="img[]" id="imageUpload4" accept="image/*">
                         </div>
                         <p>  Bio: <input type="text" name="bio" required><br></p>
                         <div class="m-1">
