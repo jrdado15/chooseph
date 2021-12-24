@@ -123,12 +123,26 @@
     <div class="row mt-3 container-fluid">
       <!-- SIDEBAR START -->
       <div class="col-3 mt-3">
-      <div class="card" style="width: 18rem; height: 100%">
-        <img src="images/<?php echo $imageArray[0];?>" id="userPic" class="profile-cover" alt="...">
+      <div class="card" style="width: 20rem; height: 100%">
+        <img src="images/<?php echo $imageArray[0];?>" id="userPic" class="profile-cover mt-2" alt="..." style="border-radius: 10px;">
         <div class="card-body">
-          <h5 class="card-title h2 mb-4"><?php echo $_SESSION['name']?></h5>
-          <!--START Temporary Age Range and Sex for showing date potentials -->
+          <div class="row justify-content-center">
+          <h5 class="card-title h2 mb-4"><?php echo $_SESSION['name']?></h5>  
+          <!-- Menu Dropdown Start -->
+          <div class="dropdown mt-1 ml-1">
+            <button class="btn btn-light" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-ellipsis-v"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#"><i class="far fa-edit"></i>  Edit Profile</a>
+              <a class="dropdown-item" href="logout.php?logout_id=<?php echo $_SESSION['userid']; ?>"><i class="fas fa-sign-out-alt"></i>  Logout</a>
+            </div>
+          </div>
+          <!-- Menu Dropdown End -->
+          </div>
+          
           <div class="mb-2">
+          <!-- Filter Start -->
             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#filter" aria-expanded="false">
                 Filters
             </button>
@@ -156,8 +170,10 @@
                 </form>
               </div>
             </div>
+            <!--Filter End -->
+            <hr>
           </div>
-          <!--END Temporary -->
+          
           <div class="btn-group d-flex" role="group" aria-label="...">
             <button id="conversations-toggle" type="button" class="btn btn-primary w-100">Conversations</button>
             <button id="matches-toggle" type="button" class="btn btn-primary w-100">Matches</button>
@@ -168,7 +184,6 @@
           <!--START Users Matches -->
           <div id="matches-div" class="matches-list card-body" style="display:none; max-height:20rem; overflow-y:scroll"></div>
           <!--END -->
-          <a href="logout.php?logout_id=<?php echo $_SESSION['userid']; ?>" class="btn btn-primary">Logout</a>
         </div>
       </div>
       </div>
@@ -178,30 +193,38 @@
       <!-- RIGHT PANEL START -->
         <div class="col-9 justify-content-center text-center relative-full-div">
         <div class="card">
-          <div class="row m-3">
+          <div class="row m-3" >
+            <!-- Profile Pictures Start -->
             <div class="col-6">
             <img src="" id="img1" class="profile-cover" alt="..." style="">
             <img src="" id="img2" class="profile-cover" alt="..." style="">
             <img src="" id="img3" class="profile-cover" alt="..." style="">
             <img src="" id="img4" class="profile-cover" alt="..." style="">
             </div>
-            <div class="col-6">
-            <input type="hidden" id="person-email" value="">
-              <h5 id="person-name" class="card-title h3"> MissingNO, </h5>
-              <h5 id="person-age"> ##</h5> 
-              <p id="person-sex"> ??</p>
-              <p id="description" class="card-text h5"> ??? </p>  
-              <div class="row mt-auto justify-content-center">
-                    <button type="submit" class=" btn btn-info btn-light m-2 p-3 " value="PASS" name="passBtn0" href="#" onclick="passUser(0)" style="border-style: solid; border-color: #c8d6e5; border-radius: 50%;">
-                    <img src="images/cross.png" alt="" style="width: 50px;">
-                    </button>
-                  <form name="form" method="GET" action="index.php">
-                    <button type="submit" class="btn btn-light m-2 p-3 " value="SMASH" name="smashBtn0" href="#" onclick="smashUser(0)" style="border-style: solid; border-color: #c8d6e5; border-radius: 50%;">
-                    <img src="images/heart.png" alt="" style="width: 50px;">
-                    </button>
-                  </form>
+            <!-- Profile Pictures End -->
+            <!-- Profile Info Start -->
+            <div class="col-6 d-flex align-items-center justify-content-center"  style="background-color:#0ba8d3;">
+              <div>
+              <input type="hidden" id="person-email" value="">
+              <h5 id="person-name" class="card-title h2 text-white"> MissingNO, </h5>
+              <div class="row justify-content-center h3 text-white">
+              <h5 id="person-age" class="h3 text-white"> ##</h5>, 
+              <h5 id="person-sex" class="ml-1 h3 text-white"> ??</h5>
               </div>
+              <p id="description" class="card-text h5 text-white"> ??? </p>
+                <div class="row">
+                    <button type="submit" class=" btn btn-info btn-light m-2 p-3 " value="PASS" name="passBtn0" href="#" onclick="passUser(0)" style="border-style: solid; border-color: #c8d6e5; border-radius: 50%;">
+                      <img src="images/cross.png" alt="" style="width: 50px;">
+                      </button>
+                    <form name="form" method="GET" action="index.php">
+                      <button type="submit" class="btn btn-light m-2 p-3 " value="SMASH" name="smashBtn0" href="#" onclick="smashUser(0)" style="border-style: solid; border-color: #c8d6e5; border-radius: 50%;">
+                      <img src="images/heart.png" alt="" style="width: 50px;">
+                      </button>
+                    </form>
+                </div>
+              </div>     
             </div>
+            <!-- Profile Info End -->
           </div>
         </div>
         </div>

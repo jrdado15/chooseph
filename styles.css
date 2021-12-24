@@ -6,7 +6,7 @@ body, html{
 }
 
 body {
-    background-color: #fafafa;
+    background-color: #9edef0;
 }
 
 div {
@@ -16,8 +16,8 @@ div {
 .card {
     
     background-color: #ffffff;
+    
 }
-
 
 
 .full-div {
@@ -33,12 +33,14 @@ div {
     width: 100%;
     top: 0;
 }
+
 .profile-cover {
-    width:100%;
+    width:95%;
     height:20vh;
-    object-fit:cover;
+    object-fit:contain;
     object-position:50% 50%;
 }
+
 .date-cover {
     width:100%;
     height:40vh;

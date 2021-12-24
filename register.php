@@ -61,7 +61,7 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://kit.fontawesome.com/21ed7fc1ee.js" crossorigin="anonymous"></script>
 </head>
-<body style="background-color: #0ba8d3;">
+<body>
         <div class="container d-flex justify-content-center align-items-center mt-3">
                 <div class="card text-center" style="width: 750px;">
                         <div class="card-body">
