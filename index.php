@@ -179,10 +179,10 @@
             <button id="matches-toggle" type="button" class="btn btn-primary w-100">Matches</button>
           </div> 
           <!--START Users Conversations -->
-          <div id="conversations-div" class="conversations-list card-body" style="max-height:20rem; overflow-y:scroll"></div>
+          <div id="conversations-div" class="conversations-list card-body" style="max-height:20rem; overflow-y:scroll;"></div>
           <!--END -->
           <!--START Users Matches -->
-          <div id="matches-div" class="matches-list card-body" style="display:none; max-height:20rem; overflow-y:scroll"></div>
+          <div id="matches-div" class="matches-list card-body" style="display:none; max-height:20rem; overflow-y:scroll;"></div>
           <!--END -->
         </div>
       </div>
@@ -196,10 +196,36 @@
           <div class="row m-3" >
             <!-- Profile Pictures Start -->
             <div class="col-6">
-            <img src="" id="img1" class="profile-cover" alt="..." style="">
-            <img src="" id="img2" class="profile-cover" alt="..." style="">
-            <img src="" id="img3" class="profile-cover" alt="..." style="">
-            <img src="" id="img4" class="profile-cover" alt="..." style="">
+              <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                </ol>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="" id="img1" class="matches-picture" alt="..." >
+                  </div>
+                  <div class="carousel-item">
+                    <img src="" id="img2" class="matches-picture" alt="..." >
+                  </div>
+                  <div class="carousel-item">
+                    <img src="" id="img3" class="matches-picture" alt="..." >
+                  </div>
+                  <div class="carousel-item">
+                    <img src="" id="img4" class="matches-picture" alt="..." >
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
             </div>
             <!-- Profile Pictures End -->
             <!-- Profile Info Start -->
@@ -231,29 +257,58 @@
       <!-- RIGHT PANEL END --> 
 
     <!-- Modal -->
-    <div class="modal fade" id="matchesModal" tabindex="-1">
-      <div class="modal-dialog">
+    <div class="modal" tabindex="-1" id="matchesModal" role="dialog">
+      <div class="modal-dialog" role="document">
         <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="person-name-modal">MissingNO</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <img src="" id="mimg1" class="profile-cover" alt="..." style="">
-        <img src="" id="mimg2" class="profile-cover" alt="..." style="">
-        <img src="" id="mimg3" class="profile-cover" alt="..." style="">
-        <img src="" id="mimg4" class="profile-cover" alt="..." style="">
-        <div class="modal-body" id="description-modal">
-        ???
-        </div>
-        <div class="modal-footer">
-        <form name="form" method="POST" action="index.php">
-          <input type="submit" value="PASS" name="passBtn1" href="#" onclick="passUser(1)">
-          <input type="submit" value="SMASH" name="smashBtn1" href="#" onclick="smashUser(1)">
-        </form>
-        </div>
+          <div class="modal-header">
+            <h5 class="modal-title" id="person-name-modal">MissingNO</h5>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="modalcarousel" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <li data-target="#modalcarousel" data-slide-to="0" class="active"></li>
+                  <li data-target="#modalcarousel" data-slide-to="1"></li>
+                  <li data-target="#modalcarousel" data-slide-to="2"></li>
+                  <li data-target="#modalcarousel" data-slide-to="3"></li>
+                </ol>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="" id="mimg1" class="modal-picture" alt="..." style="">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="" id="mimg2" class="modal-picture" alt="..." style="">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="" id="mimg3" class="modal-picture" alt="..." style="">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="" id="mimg4" class="modal-picture" alt="..." style="">
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#modalcarousel" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#modalcarousel" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <br>  
+            <p id="description-modal">???</p>
+          </div>
+          <div class="modal-footer">
+              <form name="form" method="POST" action="index.php">
+                <input type="submit" class="btn btn-danger"  value="Delete" name="passBtn1" href="#" onclick="passUser(1)">
+                <input type="submit" class="btn btn-success" value="Confirm" name="smashBtn1" href="#" onclick="smashUser(1)">
+              </form>
+          </div>
         </div>
       </div>
-    </div> 
+    </div>
     <!-- MODAL END -->
 
     </div>
@@ -338,8 +393,8 @@
               currFlag += 1;
             }
             document.getElementById('person-name').innerHTML = currData[currFlag]['pub_name'];
-            document.getElementById('person-age').innerHTML = currData[currflag]['pub_age'];
-            document.getElementById('person-sex').innerHTML = currData[currflag]['pub_sex'];
+            document.getElementById('person-age').innerHTML = currData[currFlag]['pub_age'];
+            document.getElementById('person-sex').innerHTML = currData[currFlag]['pub_sex'];
             document.getElementById('description').innerHTML = currData[currFlag]['pub_desc'];
             var arr = currData[currFlag]['pub_img'].split(',');
             img1.src = 'images/' + arr[0];
@@ -371,8 +426,8 @@
               currFlag += 1;
             }
             document.getElementById('person-name').innerHTML = currData[currFlag]['pub_name'];
-            document.getElementById('person-age').innerHTML = currData[currflag]['pub_age'];
-            document.getElementById('person-sex').innerHTML = currData[currflag]['pub_sex'];
+            document.getElementById('person-age').innerHTML = currData[currFlag]['pub_age'];
+            document.getElementById('person-sex').innerHTML = currData[currFlag]['pub_sex'];
             document.getElementById('description').innerHTML = currData[currFlag]['pub_desc'];
             var arr = currData[currFlag]['pub_img'].split(',');
             img1.src = 'images/' + arr[0];

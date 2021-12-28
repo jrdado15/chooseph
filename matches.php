@@ -29,22 +29,26 @@
                         $imageArray = explode(',', $row3['pub_img']);
                     }
                 }
-                $output .= '<a onclick="matchClicked('.$counter.')" data-bs-toggle="modal" data-bs-target="#matchesModal">
-                                <div class="row align-items-center mb-3">
-                                    <div class="col-4">
-                                        <span class="img-responsive">
-                                            <img class="img-fluid rounded-circle z-depth-2" alt="" src="images/' . $imageArray[0] . '" data-holder-rendered="true">
-                                        </span>
-                                    </div>
-                                    <div class="col-8">  
-                                        <input type="hidden" id="matchesEmail'.$counter.'" value="'. $matchedUserEmail .'">
-                                        <input type="hidden" id="matchesPublicName'.$counter.'" value="'. $publicName .'">
-                                        <input type="hidden" id="matchesPublicImage'.$counter.'" value="'. $row3['pub_img'] .'">
-                                        <input type="hidden" id="matchesPublicDesc'.$counter.'" value="'. $publicDesc .'">
-                                        <h4 class="h4">'. $row2['first_name'] .'</h4>
-                                    </div>
-                                </div>
-                            </a>';
+                
+                $output .= '
+                <div class="">
+                <a onclick="matchClicked('.$counter.')" data-bs-toggle="modal" data-bs-target="#matchesModal">
+                    <div class="row align-items-center mb-3">
+                        <div class="col-4">
+                            <span class="img-responsive">
+                                <img class="img-fluid rounded-circle z-depth-2" alt="" src="images/' . $imageArray[0] . '" data-holder-rendered="true">
+                            </span>
+                        </div>
+                        <div class="col-8">  
+                            <input type="hidden" id="matchesEmail'.$counter.'" value="'. $matchedUserEmail .'">
+                            <input type="hidden" id="matchesPublicName'.$counter.'" value="'. $publicName .'">
+                            <input type="hidden" id="matchesPublicImage'.$counter.'" value="'. $row3['pub_img'] .'">
+                            <input type="hidden" id="matchesPublicDesc'.$counter.'" value="'. $publicDesc .'">
+                            <h4 class="h4">'. $row2['first_name'] .'</h4>
+                        </div>
+                    </div>
+                </a>
+                </div>';
                 $counter++;
             }
         }

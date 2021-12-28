@@ -67,23 +67,23 @@
                         <div class="card-body">
                         <form name="register" method="post" enctype="multipart/form-data">
                         <h3>Welcome, <?php echo $_SESSION['name'];?><br></h3>
-                        <p>To get started, please upload at least one (1) picture.</p>
+                        <p>To get started, please upload four (4) pictures.</p>
                         <hr>
                         <div class="btn btn-outline-secondary btn-rounded m-2">
                         <img class="profile-cover" src="images\addImage.png" id="profileImage" style="width:200px;">
-                        <input class="d-none" type="file" name="img[]" id="imageUpload" accept="image/*"  required>
+                        <input class="d-none" type="file" name="img[]" id="imageUpload" accept="image/*"  onchange="success()" required>
                         </div>
                         <div class="btn btn-outline-secondary btn-rounded m-2">
                         <img  class="profile-cover" src="images\addImage.png" id="profileImage2" style="width:200px;">
-                        <input class="d-none" type="file" name="img[]" id="imageUpload2" accept="image/*">
+                        <input class="d-none" type="file" name="img[]" id="imageUpload2" accept="image/*" onchange="success()" required>
                         </div> <br>
                         <div class="btn btn-outline-secondary btn-rounded m-2">
                         <img  src="images\addImage.png" id="profileImage3" style="width:200px;">
-                        <input class="d-none" type="file" name="img[]" id="imageUpload3" accept="image/*">
+                        <input class="d-none" type="file" name="img[]" id="imageUpload3" accept="image/*" onchange="success()" required>
                         </div>
                         <div class="btn btn-outline-secondary btn-rounded m-2">
                         <img src="images\addImage.png" id="profileImage4" style="width:200px;">
-                        <input class="d-none" type="file" name="img[]" id="imageUpload4" accept="image/*">
+                        <input class="d-none" type="file" name="img[]" id="imageUpload4" accept="image/*" onchange="success()" required>
                         </div>
                         <p>  Bio: <input type="text" name="bio" required><br></p>
                         <div class="m-1">
@@ -93,7 +93,7 @@
                         </select>
                         </div>
                         Age: <input type="number"  name="age" min="18" max="100" required><br>
-                        <input type="submit" class="btn btn-primary btn-rounded m-3" name="saveButton" value="SAVE">
+                        <input type="submit" class="btn btn-primary btn-rounded m-3" name="saveButton" id="saveBTN" value="SAVE" disabled>
                     </form>
                         </div>
                 </div>  
@@ -101,6 +101,16 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script>
+          //FUNCTION FOR BUTTON DISABLE IF REQ NOT MET
+          function success() {
+	        if ((document.getElementById("imageUpload").value==="") || (document.getElementById("imageUpload2").value==="") ||
+                (document.getElementById("imageUpload3").value==="") || (document.getElementById("imageUpload4").value==="")
+                ) {
+                document.getElementById('saveBTN').disabled = true;
+            } else {
+                document.getElementById('saveBTN').disabled = false;
+            }
+        }
           //FUNCTION FOR IMAGE UPLOAD
 
           $("#profileImage").click(function(e) {
