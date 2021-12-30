@@ -62,17 +62,11 @@
                   </div>
                   <!-- Menu Dropdown End -->
                   </div>
-                  
-                  
-                  <div class="btn-group d-flex" role="group" aria-label="...">
-                    <button id="conversations-toggle" type="button" class="btn btn-primary w-100">Conversations</button>
-                    <button id="matches-toggle" type="button" class="btn btn-primary w-100">Matches</button>
+                  <div class="bg-primary border rounded text-white text-center m-2">
+                    <p class="h5 mt-1">Conversations</p>
                   </div> 
                   <!--START Users Conversations -->
                   <div id="conversations-div" class="conversations-list sidebar card-body" style="max-height:20rem; overflow-y:scroll;"></div>
-                  <!--END -->
-                  <!--START Users Matches -->
-                  <div id="matches-div" class="matches-list sidebar card-body" style="display:none; max-height:20rem; overflow-y:scroll;"></div>
                   <!--END -->
                 </div>
               </div>
@@ -127,31 +121,6 @@
 
   <script src="chat.js"></script>
   <script src="conversations.js"></script>
-  <script src="matches.js"></script>
-  <script>
-      const chatDiv = document.getElementById("conversations-div");
-      const matchDiv = document.getElementById("matches-div");
-      const chatBtn = document.getElementById("conversations-toggle");
-      const matchBtn = document.getElementById("matches-toggle");
-
-      chatBtn.onclick = function () {
-        if (chatDiv.style.display !== "none") {
-          //Do nothing
-        } else {
-          chatDiv.style.display = "block";
-          matchDiv.style.display = "none";
-        }
-      };
-      matchBtn.onclick = function () {
-        if (matchDiv.style.display !== "none") {
-          //Do nothing
-        } else {
-          matchDiv.style.display = "block";
-          chatDiv.style.display = "none";
-        }
-      };  
-     
-  </script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
