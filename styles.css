@@ -13,8 +13,23 @@ div {
     display: block;
 }
 
+.sidebar {
+    height: 30vh;
+}
+
+.sidebar-item:hover {
+    background-color:  #a5b1c2;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
 a:hover{
     cursor: pointer;
+    text-decoration: none;
+    color: black;
 }
 
 .card {

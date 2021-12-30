@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+@import "https://fonts.googleapis.com/css2?family=Quicksand&display=swap";
+
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Quicksand', sans-serif;
 }
 body{
   display: flex;
@@ -15,12 +17,37 @@ body{
   padding: 0 10px;
 }
 .wrapper{
-  background: #fff;
-  max-width: 450px;
-  width: 100%;
+  background: #0ba8d3;
+  width: 65rem;
   border-radius: 16px;
   box-shadow: 0 0 128px 0 rgba(0,0,0,0.1),
               0 32px 64px -48px rgba(0,0,0,0.5);
+}
+
+.profile-cover {
+  width:100%;
+  height:20vh;
+  object-fit:contain;
+  object-position:50% 50%;
+}
+
+.sidebar {
+  height: 30vh;
+}
+
+.sidebar-item:hover {
+  background-color:  #a5b1c2;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover{
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
 }
 /* Chat Area CSS Start */
 .chat-area header{
@@ -29,7 +56,7 @@ body{
   padding: 18px 30px;
 }
 .chat-area header .back-icon{
-  color: #333;
+  color: #fff;
   font-size: 18px;
 }
 .chat-area header img{
@@ -38,8 +65,9 @@ body{
   margin: 0 15px;
 }
 .chat-area header .details span{
-  font-size: 17px;
+  font-size: 20px;
   font-weight: 500;
+  color: #fff;
 }
 .chat-box{
   position: relative;
@@ -76,8 +104,9 @@ body{
   max-width: calc(100% - 130px);
 }
 .outgoing .details p{
-  background: #333;
+  background: #2e86de;
   color: #fff;
+  font-size: 18px;
   border-radius: 18px 18px 0 18px;
 }
 .chat-box .incoming{
@@ -95,7 +124,8 @@ body{
 }
 .incoming .details p{
   background: #fff;
-  color: #333;
+  color: #0ba8d3;
+  font-size: 18px;
   border-radius: 18px 18px 18px 0;
 }
 .typing-area{
@@ -106,7 +136,7 @@ body{
 .typing-area input{
   height: 45px;
   width: calc(100% - 58px);
-  font-size: 16px;
+  font-size: 18px;
   padding: 0 13px;
   border: 1px solid #e6e6e6;
   outline: none;
@@ -117,7 +147,7 @@ body{
   width: 55px;
   border: none;
   outline: none;
-  background: #333;
+  background: #9edef0;
   font-size: 19px;
   cursor: pointer;
   opacity: 0.7;
@@ -125,6 +155,11 @@ body{
   border-radius: 0 5px 5px 0;
   transition: all 0.3s ease;
 }
+
+.typing-area button:hover{
+  color: #0ba8d3;
+}
+
 .typing-area button.active{
   opacity: 1;
   pointer-events: auto;

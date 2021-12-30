@@ -31,7 +31,8 @@
                 }
                 
                 $output .= '
-                <div class="">
+                <div class="sidebar-item">
+                <hr>
                 <a onclick="matchClicked('.$counter.')" data-bs-toggle="modal" data-bs-target="#matchesModal">
                     <div class="row align-items-center mb-3">
                         <div class="col-4">
@@ -48,6 +49,7 @@
                         </div>
                     </div>
                 </a>
+                <hr>
                 </div>';
                 $counter++;
             }

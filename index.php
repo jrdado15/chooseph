@@ -179,10 +179,10 @@
             <button id="matches-toggle" type="button" class="btn btn-primary w-100">Matches</button>
           </div> 
           <!--START Users Conversations -->
-          <div id="conversations-div" class="conversations-list card-body" style="max-height:20rem; overflow-y:scroll;"></div>
+          <div id="conversations-div" class="conversations-list sidebar card-body" style="max-height:20rem; overflow-y:scroll;"></div>
           <!--END -->
           <!--START Users Matches -->
-          <div id="matches-div" class="matches-list card-body" style="display:none; max-height:20rem; overflow-y:scroll;"></div>
+          <div id="matches-div" class="matches-list sidebar card-body" style="display:none; max-height:20rem; overflow-y:scroll;"></div>
           <!--END -->
         </div>
       </div>

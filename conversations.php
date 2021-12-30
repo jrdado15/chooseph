@@ -61,7 +61,10 @@
                     $sql2 = "SELECT * FROM users_profile WHERE email = '$matched_user'";
                     $query2 = $conn->query($sql2);
                     while($row2 = $query2->fetch_assoc()) {
-                        $output .= '<a href="chat.php?chatid='. $row2['email'] .'">
+                        $output .= '
+                        <div class="sidebar-item">
+                            <hr>
+                            <a href="chat.php?chatid='. $row2['email'] .'">
                                         <div class="row align-items-center mb-3">
                                             <div class="col-4">
                                                 <span class="img-responsive">
@@ -72,7 +75,12 @@
                                                 <h4 class="h4">'. $row2['first_name'] .'</h4>
                                             </div>
                                         </div>
-                                    </a>';
+                                    </a>
+                            <hr>
+                        </div>
+                        '
+                                    
+                                    ;
                     } 
                 }
                   
