@@ -47,25 +47,25 @@
     if($img[0] =='')
         $list .= $imageArray[0];
     else
-        $imageName[0] = "image_".rand(100000000,999999999);
+        $imageName[0] = "image_".rand(100000000,999999999).".png";
         $list .= $imageName[0];
     $list .= ',';
     if($img[1] =='')
         $list .= $imageArray[1];
     else
-        $imageName[1] = "image_".rand(100000000,999999999);
+        $imageName[1] = "image_".rand(100000000,999999999).".png";
         $list .= $imageName[1];
     $list .= ',';
     if($img[2] =='')
         $list .= $imageArray[2];
     else
-        $imageName[2] = "image_".rand(100000000,999999999);
+        $imageName[2] = "image_".rand(100000000,999999999).".png";
         $list .= $imageName[2];
     $list .= ',';
     if($img[3] =='')
       $list .= $imageArray[3];
     else
-        $imageName[3] = "image_".rand(100000000,999999999);
+        $imageName[3] = "image_".rand(100000000,999999999).".png";
         $list .= $imageName[3];
     $bio = $_POST['bio'];
     $sex = $_POST['sex'];

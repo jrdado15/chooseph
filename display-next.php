@@ -69,6 +69,9 @@ if(($row0 = $query0->fetch_assoc()) > 0) {
     }
 }
 
+$image_array = array();
+$image_array = explode(',', $curr_data[0]['pub_img']);
+//print_r($image_array);
 $output .=  '
             <div class="card">
                 <div class="row m-3" >
@@ -83,16 +86,16 @@ $output .=  '
                     </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                        <img src="" id="img1" class="matches-picture" alt="..." >
+                        <img src="images/'. $image_array[0] .'" id="img1" class="matches-picture" alt="..." >
                         </div>
                         <div class="carousel-item">
-                        <img src="" id="img2" class="matches-picture" alt="..." >
+                        <img src="images/'. $image_array[0] .'" id="img2" class="matches-picture" alt="..." >
                         </div>
                         <div class="carousel-item">
-                        <img src="" id="img3" class="matches-picture" alt="..." >
+                        <img src="images/'. $image_array[0] .'" id="img3" class="matches-picture" alt="..." >
                         </div>
                         <div class="carousel-item">
-                        <img src="" id="img4" class="matches-picture" alt="..." >
+                        <img src="images/'. $image_array[0] .'" id="img4" class="matches-picture" alt="..." >
                         </div>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

@@ -13,7 +13,7 @@
     header('location: register.php');
     exit();
   }
-  //Gets you public id
+  //Gets your public id
   $idEmail = $_SESSION['userid'];
   $idSql="SELECT * FROM users_profile WHERE email = '$idEmail'";
   $idArray = array();
@@ -91,7 +91,7 @@
                 <div class="input-group">
                     <input id="min-age" name="min-age" class="form-control" type="text" placeholder="Default input">
                     <script type="text/javascript">
-                    document.getElementById('min-age').value = '18';
+                      document.getElementById('min-age').value = '18';
                     </script>
                     <input id="max-age" name="max-age" class="form-control" type="text" placeholder="Default input">
                     <script type="text/javascript">
@@ -196,14 +196,10 @@
       const matchDiv = document.getElementById("matches-div");
       const chatBtn = document.getElementById("conversations-toggle");
       const matchBtn = document.getElementById("matches-toggle");
-      /*const img1 = document.getElementById('img1');
-      const img2 = document.getElementById('img2');
-      const img3 = document.getElementById('img3');
-      const img4 = document.getElementById('img4');
       const mimg1 = document.getElementById('mimg1');
       const mimg2 = document.getElementById('mimg2');
       const mimg3 = document.getElementById('mimg3');
-      const mimg4 = document.getElementById('mimg4');*/
+      const mimg4 = document.getElementById('mimg4');
       var minAge, maxAge, rotationNum = 0;
       var email, sex;
 
