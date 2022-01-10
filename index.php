@@ -7,7 +7,6 @@
     header('location: login.php');
     exit();
   }
-
   $email = $_SESSION['userid'];
   $check="SELECT * FROM users_profile WHERE email='$email' AND pub_id=0 LIMIT 1";
   if($conn->query($check)->num_rows > 0) {
@@ -32,75 +31,14 @@
   }
   //Turns comma list into array
   $imageArray = explode(',', $imageArray['pub_img']);
-  //print_r($imageArray);
 
-  $curr_data = array();
-  $likedUsersEmail = array();
-  $likedUsersID = array();
-  $minAge; $maxAge;  $sex;
-
+  //Start
+  $minAge; $maxAge; $sex; $rotationNum = 0;
+  
   if(isset($_GET['btnSubmit'])) {
-    $email = $_SESSION['userid'];
-    $sql3 = "SELECT * FROM match_record WHERE unique_id1 = '$email' OR unique_id2 = '$email'";
-    $query3 = $conn->query($sql3);
-    $counter = 0;
-    while($row3 = $query3->fetch_assoc()) {
-      if ($email == $row3['unique_id1']){
-        $likedUsersEmail[$counter] = $row3['unique_id2'];
-      } elseif ($email == $row3['unique_id2']){
-        $likedUsersEmail[$counter] = $row3['unique_id1'];
-      }
-      $counter++;
-    }
-    $counter = 0;
-    foreach ($likedUsersEmail as $likedEmail) {
-      $sql4 = "SELECT * FROM users_profile WHERE email = '$likedEmail'";
-      $query4 = $conn->query($sql4);
-      if(($row4 = $query4->fetch_assoc()) > 0) {
-        $likedUsersID[$counter] = $row4['pub_id'];
-        $counter++;
-      }
-    }
-    $sql0 = "SELECT * FROM users_profile WHERE email = '$email'";
-    $query0 = $conn->query($sql0);
-    if(($row0 = $query0->fetch_assoc()) > 0) {
-      $userPubID = $row0['pub_id'];
-      $minAge = $_GET["min-age"];
-      $maxAge = $_GET["max-age"];
-      $sex = $_GET["sexSelect"];
-      $implodedLikedUsersID = implode(", ",array_values($likedUsersID));
-      if ($sex == "Everything"){
-        $sql = "SELECT * FROM public_record WHERE pub_age BETWEEN $minAge AND $maxAge AND NOT pub_id = $userPubID AND pub_id NOT IN ('$implodedLikedUsersID')";
-      } else {
-        $sql = "SELECT * FROM public_record WHERE pub_sex='$sex' AND pub_age BETWEEN $minAge AND $maxAgeNOT AND NOT pub_id = $userPubIDAND AND pub_id NOT IN ('$implodedLikedUsersID')";
-      }
-      $result = $conn->query($sql);
-      if ($result) {
-        if ($result->num_rows > 0) {
-          $counter = 0;
-          while($row = $result->fetch_assoc()) { 
-            $id = $row['pub_id'];
-            
-            if (in_array($id, $likedUsersID)){
-              //
-            } else {
-              $curr_data[] = $row;
-              $sql2 = "SELECT * FROM users_profile WHERE pub_id = '$id'";
-              $query2 = $conn->query($sql2);
-              if(($row2 = $query2->fetch_assoc()) > 0) {
-                $curr_data[$counter]['pub_id'] = $row2['email'];
-                //print_r($curr_data[$counter]);
-                $counter++;
-              }
-            }
-          }
-        } else {
-          echo '<script>alert("NO RECORD")</script>'; 
-        }
-      } else {
-        echo $conn->error;
-      }
-    }
+    $minAge = $_GET["min-age"];
+    $maxAge = $_GET["max-age"];
+    $sex = $_GET["sexSelect"];
   }
 ?>
 
@@ -118,8 +56,9 @@
     <script src="https://kit.fontawesome.com/21ed7fc1ee.js" crossorigin="anonymous"></script>
   </head>
   <body>
-  
-    
+    <!-- Hidden Data -->
+    <input type="hidden" id="rotation" value=0>
+
     <div class="row mt-3 container-fluid">
       <!-- SIDEBAR START -->
       <div class="col-3 mt-3">
@@ -189,71 +128,8 @@
       </div>
       <!-- SIDEBAR END -->
 
-
       <!-- RIGHT PANEL START -->
-        <div class="col-9 justify-content-center text-center relative-full-div">
-        <div class="card">
-          <div class="row m-3" >
-            <!-- Profile Pictures Start -->
-            <div class="col-6">
-              <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                  <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                  <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                  <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-                </ol>
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img src="" id="img1" class="matches-picture" alt="..." >
-                  </div>
-                  <div class="carousel-item">
-                    <img src="" id="img2" class="matches-picture" alt="..." >
-                  </div>
-                  <div class="carousel-item">
-                    <img src="" id="img3" class="matches-picture" alt="..." >
-                  </div>
-                  <div class="carousel-item">
-                    <img src="" id="img4" class="matches-picture" alt="..." >
-                  </div>
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Next</span>
-                </a>
-              </div>
-            </div>
-            <!-- Profile Pictures End -->
-            <!-- Profile Info Start -->
-            <div class="col-6 d-flex align-items-center justify-content-center"  style="background-color:#0ba8d3;">
-              <div>
-              <input type="hidden" id="person-email" value="">
-              <h5 id="person-name" class="card-title h2 text-white"> MissingNO, </h5>
-              <div class="row justify-content-center h3 text-white">
-              <h5 id="person-age" class="h3 text-white"> ##</h5>, 
-              <h5 id="person-sex" class="ml-1 h3 text-white"> ??</h5>
-              </div>
-              <p id="description" class="card-text h5 text-white"> ??? </p>
-                <div class="row">
-                    <button type="submit" class=" btn btn-info btn-light m-2 p-3 " value="PASS" name="passBtn0" href="#" onclick="passUser(0)" style="border-style: solid; border-color: #c8d6e5; border-radius: 50%;">
-                      <img src="images/cross.png" alt="" style="width: 50px;">
-                      </button>
-                    <form name="form" method="GET" action="index.php">
-                      <button type="submit" class="btn btn-light m-2 p-3 " value="SMASH" name="smashBtn0" href="#" onclick="smashUser(0)" style="border-style: solid; border-color: #c8d6e5; border-radius: 50%;">
-                      <img src="images/heart.png" alt="" style="width: 50px;">
-                      </button>
-                    </form>
-                </div>
-              </div>     
-            </div>
-            <!-- Profile Info End -->
-          </div>
-        </div>
-        </div>
+        <div class="right-panel col-9 justify-content-center text-center relative-full-div"></div>
       <!-- RIGHT PANEL END --> 
 
     <!-- Modal -->
@@ -297,7 +173,7 @@
                   <span class="sr-only">Next</span>
                 </a>
             </div>
-            <br>  
+            <br>    
             <p id="description-modal">???</p>
           </div>
           <div class="modal-footer">
@@ -320,19 +196,16 @@
       const matchDiv = document.getElementById("matches-div");
       const chatBtn = document.getElementById("conversations-toggle");
       const matchBtn = document.getElementById("matches-toggle");
-      const img1 = document.getElementById('img1');
+      /*const img1 = document.getElementById('img1');
       const img2 = document.getElementById('img2');
       const img3 = document.getElementById('img3');
       const img4 = document.getElementById('img4');
       const mimg1 = document.getElementById('mimg1');
       const mimg2 = document.getElementById('mimg2');
       const mimg3 = document.getElementById('mimg3');
-      const mimg4 = document.getElementById('mimg4');
-      var currData = [];
-      var currFlag = 0;
-      var sameData = true;
-      var minAge, maxAge;
-      var email, sex, publicName, publicDesc;
+      const mimg4 = document.getElementById('mimg4');*/
+      var minAge, maxAge, rotationNum = 0;
+      var email, sex;
 
       chatBtn.onclick = function () {
         if (chatDiv.style.display !== "none") {
@@ -350,108 +223,31 @@
           chatDiv.style.display = "none";
         }
       };
-      function resetData(){
-        currData = <?php echo json_encode($curr_data); ?>;
-        minAge =  <?php echo json_encode($minAge); ?>;
-        maxAge =  <?php echo json_encode($maxAge); ?>;
-        sex = <?php echo json_encode($sex); ?>;
-        document.getElementById('min-age').value = minAge;
-        document.getElementById('max-age').value = maxAge;
-        selectElement('sexSelect', sex);
-        currFlag = 0;
-        viewUser(currFlag);
-      }
-      function viewUser(flag){
-        document.getElementById('person-name').innerHTML = currData[flag]['pub_name'];
-        document.getElementById('person-age').innerHTML = currData[flag]['pub_age'];
-        document.getElementById('person-sex').innerHTML = currData[flag]['pub_sex'];
-        document.getElementById('description').innerHTML = currData[flag]['pub_desc'];
-        var arr = currData[flag]['pub_img'].split(',');
-        img1.src = 'images/' + arr[0];
-        img2.src = 'images/' + arr[1];
-        img3.src = 'images/' + arr[2];
-        img4.src = 'images/' + arr[3];
-        sameData = true;
-        if(img1.src == "http://localhost/chooseph/images/")
-          img1.style.display='none';
-        if(img2.src == "http://localhost/chooseph/images/")
-          img2.style.display='none';
-        if(img3.src == "http://localhost/chooseph/images/")
-          img3.style.display='none';
-        if(img4.src == "http://localhost/chooseph/images/")
-          img4.style.display='none';
-      }
-      function passUser(type){
-        if(type == 0){
-          //from main menu
-          document.cookie = 'email=' + currData[currFlag]['pub_id'];
-          
-          if (sameData){
-            if (currFlag == currData.length-1){
-              currFlag = 0;
-            } else {
-              currFlag += 1;
-            }
-            document.getElementById('person-name').innerHTML = currData[currFlag]['pub_name'];
-            document.getElementById('person-age').innerHTML = currData[currFlag]['pub_age'];
-            document.getElementById('person-sex').innerHTML = currData[currFlag]['pub_sex'];
-            document.getElementById('description').innerHTML = currData[currFlag]['pub_desc'];
-            var arr = currData[currFlag]['pub_img'].split(',');
-            img1.src = 'images/' + arr[0];
-            img2.src = 'images/' + arr[1];
-            img3.src = 'images/' + arr[2];
-            img4.src = 'images/' + arr[3];
-            if(img1.src == "http://localhost/chooseph/images/")
-              img1.style.display='none';
-            if(img2.src == "http://localhost/chooseph/images/")
-              img2.style.display='none';
-            if(img3.src == "http://localhost/chooseph/images/")
-              img3.style.display='none';
-            if(img4.src == "http://localhost/chooseph/images/")
-              img4.style.display='none';
-          }
-        } else {
-          //from matches modal 
-          document.cookie = 'email=' + email;
-        }
-      }
-      function smashUser(type){
-        if(type == 0){
-          //from main menu
-          document.cookie = 'email=' + currData[currFlag]['pub_id'];
-          if (sameData){
-            if (currFlag == currData.length-1){
-              currFlag = 0;
-            } else {
-              currFlag += 1;
-            }
-            document.getElementById('person-name').innerHTML = currData[currFlag]['pub_name'];
-            document.getElementById('person-age').innerHTML = currData[currFlag]['pub_age'];
-            document.getElementById('person-sex').innerHTML = currData[currFlag]['pub_sex'];
-            document.getElementById('description').innerHTML = currData[currFlag]['pub_desc'];
-            var arr = currData[currFlag]['pub_img'].split(',');
-            img1.src = 'images/' + arr[0];
-            img2.src = 'images/' + arr[1];
-            img3.src = 'images/' + arr[2];
-            img4.src = 'images/' + arr[3];
-            if(img1.src == "http://localhost/chooseph/images/")
-              img1.style.display='none';
-            if(img2.src == "http://localhost/chooseph/images/")
-              img2.style.display='none';
-            if(img3.src == "http://localhost/chooseph/images/")
-              img3.style.display='none';
-            if(img4.src == "http://localhost/chooseph/images/")
-              img4.style.display='none';
-          }
-        } else {
-          //from matches modal
-          document.cookie = 'email=' + email;
-        }
-      }
+
       function selectElement(id, valueToSelect) {    
         let element = document.getElementById(id);
         element.value = valueToSelect;
       } 
+
+      function setData(){
+        minAge = <?php echo json_encode($minAge); ?>;
+        maxAge = <?php echo json_encode($maxAge); ?>;
+        sex = <?php echo json_encode($sex); ?>;
+        document.getElementById('min-age').value = minAge;
+        document.getElementById('max-age').value = maxAge;
+        selectElement('sexSelect', sex);
+      }
+
+      function passUser(){
+        document.cookie = 'email=' + email;
+      }
+
+      function smashUser(){
+        var likedEmail = document.getElementById("person-email").value;
+        document.cookie = 'email=' + email;
+        document.cookie = 'likedEmail=' + likedEmail;
+      }
+      
       function matchClicked(flag){
         email = document.getElementById("matchesEmail"+flag).value;
         publicName = document.getElementById("matchesPublicName"+flag).value;
@@ -474,38 +270,66 @@
         document.getElementById('description-modal').innerHTML = publicDesc;
       }
     </script>
-    <script src="conversations.js"></script>
-    <script src="matches.js"></script>
+    <script type="text/javascript" src="conversations.js"></script>
+    <script type="text/javascript" src="matches.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
   </body>
-</html>
+</html> 
 
 <?php
-  if(isset($_GET['btnSubmit']) || isset($_GET['smashBtn0'])){
-    echo "<script> resetData(); </script>";
-  }  
-  
-  if(isset($_GET['smashBtn0'])) {
+  //set data
+  if(isset($_GET['btnSubmit'])){
+    echo "<script> setData(); </script>";
+    echo "<script type='text/javascript' src='display.js'></script>";
+  }
+
+  if (isset($_GET['passBtn0'])){
     $userEmail = $_SESSION['userid'];
-    $emailLiked =  $_COOKIE['email'];
-
-    foreach($curr_data as $subKey => $subArray){
-      if($subArray['pub_id'] == $emailLiked){
-        unset($curr_data[$subKey]);
-      }
+    echo "<script> alert('Error updating record:'". $conn->error .") </script> " ;
+    $sql5 = "SELECT * FROM users_profile WHERE email = '$email'";
+    $query5 = $conn->query($sql5);
+    while($row5 = $query5->fetch_assoc()) {
+      $rotationNum = $row5['rotation'];
     }
-
-    $sql = "INSERT INTO match_record(unique_id1, unique_id2, match_status) VALUES ('$userEmail', '$emailLiked', 'unmatched')";
-    if ($conn->query($sql)) { 
-      //echo "<script> alert('Record updated successfully') </script>";
+    $rotationNum++;
+    $sql = "UPDATE users_profile SET rotation = $rotationNum WHERE email = '$email'";
+    if ($conn->query($sql)) {
       header('location: index.php?min-age=18&max-age=70&sexSelect=Everything&btnSubmit=SUBMIT');
     } else {
       echo "<script> alert('Error updating record:'". $conn->error .") </script> " ;
     }
   }
+
+  if(isset($_GET['smashBtn0'])){
+    $userEmail = $_SESSION['userid'];
+    $emailLiked = $_COOKIE['likedEmail'];
+    echo "<script> alert('Error updating record:'". $conn->error .") </script> " ;
+    $sql5 = "SELECT * FROM users_profile WHERE email = '$email'";
+    $query5 = $conn->query($sql5);
+    while($row5 = $query5->fetch_assoc()) {
+      $rotationNum = $row5['rotation'];
+    }
+    $rotationNum++;
+    $sql = "UPDATE users_profile SET rotation = $rotationNum WHERE email = '$email'";
+    if ($conn->query($sql)) {
+      foreach($curr_data as $subKey => $subArray){
+        if($subArray['pub_id'] == $emailLiked){
+          unset($curr_data[$subKey]);
+        }
+      }
+      $sql = "INSERT INTO match_record(unique_id1, unique_id2, match_status) VALUES ('$userEmail', '$emailLiked', 'unmatched')";
+      if ($conn->query($sql)) { 
+        header('location: index.php?min-age=18&max-age=70&sexSelect=Everything&btnSubmit=SUBMIT');
+      } else {
+        echo "<script> alert('Error updating record:'". $conn->error .") </script> " ;
+      }
+    } else {
+      echo "<script> alert('Error updating record:'". $conn->error .") </script> " ;
+    }
+  }  
 
   if(isset($_POST['passBtn1'])) {
     $userEmail = $_SESSION['userid'];
@@ -533,5 +357,5 @@
     }
   }
 
-  ob_end_flush();
+  ob_flush();
 ?>

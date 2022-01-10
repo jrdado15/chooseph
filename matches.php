@@ -1,11 +1,6 @@
 <?php
     session_start();
     if(isset($_SESSION['userid'])) {
-        /**
-         * unique_id1 = mark and joseph
-         * unique_id2 = carl 
-         * status = both matched
-         */
         include_once "dbconfig.php";
         $userid = $_SESSION['userid'];
         $sql = "SELECT * FROM match_record WHERE unique_id2 = '$userid' AND match_status = 'unmatched'";
