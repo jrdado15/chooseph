@@ -129,7 +129,52 @@
       <!-- SIDEBAR END -->
 
       <!-- RIGHT PANEL START -->
-        <div class="right-panel col-9 justify-content-center text-center relative-full-div"></div>
+        <div class="col-9 justify-content-center text-center relative-full-div">
+        <div class="card">
+          <div class="row m-3" >
+          <!-- Profile Pictures Start -->
+          <div class="col-6">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+              </ol>
+              <div class="carousel-inner">
+                  <div class="display-image-1 carousel-item active">
+                    <img src="images/placeholder.png" id="img1" class="matches-picture" alt="..." >
+                  </div>
+                  <div class="display-image-2 carousel-item">
+                    <img src="images/placeholder.png" id="img2" class="matches-picture" alt="..." >
+                  </div>
+                  <div class="display-image-3 carousel-item">
+                    <img src="images/placeholder.png" id="img3" class="matches-picture" alt="..." >
+                  </div>
+                  <div class="display-image-4 carousel-item">
+                    <img src="images/placeholder.png" id="img4" class="matches-picture" alt="..." >
+                  </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+              </a>
+            </div>
+          </div>
+          <!-- Profile Pictures End -->
+          <!-- Profile Info Start -->
+          <div class="display-info col-6 d-flex align-items-center justify-content-center"  style="background-color:#0ba8d3;">
+                
+          </div>
+          <!-- Profile Info End -->
+          </div>
+      </div>
+
+        </div>
       <!-- RIGHT PANEL END --> 
 
     <!-- Modal -->
@@ -280,6 +325,7 @@
   if(isset($_GET['btnSubmit'])){
     echo "<script> setData(); </script>";
     echo "<script type='text/javascript' src='display.js'></script>";
+    echo "<script type='text/javascript' src='display-images.js'></script>";
   }
 
   if (isset($_GET['passBtn0'])){

@@ -1,4 +1,4 @@
-const displayList = document.querySelector(".right-panel");
+const displayList = document.querySelector(".display-info");
 setInterval(() => {
   let xhr = new XMLHttpRequest();
   xhr.open("GET", "display.php?minAge=" + minAge + "&maxAge=" + maxAge + "&sex=" + sex, true);
@@ -11,4 +11,4 @@ setInterval(() => {
     }
   }
   xhr.send();
-}, 500);
+}, 1000);

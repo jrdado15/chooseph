@@ -1,8 +1,11 @@
 <?php
 session_start();
 if(isset($_SESSION['userid'])) {
+    $output = '';
+    $imageIndex = $_GET['num'];
+    //dsa
     include_once 'dbconfig.php';
-
+    
     $minAge = $_GET['minAge'];
     $maxAge = $_GET['maxAge'];
     $sex = $_GET['sex'];
@@ -78,64 +81,38 @@ if(isset($_SESSION['userid'])) {
                 }
                 if ($counter == 0){
                     //dito pupunta pag walang data
-                    $output .=  '
-                                <div class="card">
-                                    <div class="row m-3" >
-                                    <!-- Profile Info Start -->
-                                    <div class="col-12 d-flex align-items-center justify-content-center"  style="background-color:#0ba8d3;">
-                                        <h5 id="person-age" class="h3 text-white"> No data found, try again tomorrow! </h5>   
-                                    </div>
-                                    <!-- Profile Info End -->
-                                    </div>
-                                </div>
-                                ';
+                    $output = "";
                 } else {
                     $image_array = array();
                     $image_array = explode(',', $curr_data[$rotationNum]['pub_img']);
-                    //print_r($image_array);
-                    $output .=  '
-                                <div>
-                                    <input type="hidden" id="person-id" value="' . $curr_id . '">
-                                    <input type="hidden" id="person-email" value="' . $curr_data[$rotationNum]['pub_id'] . '">
-                                    <h5 id="person-name" class="card-title h2 text-white"> ' . $curr_data[$rotationNum]['pub_name'] . ' </h5>
-                                    <div class="row justify-content-center h3 text-white">
-                                        <h5 id="person-age" class="h3 text-white"> ' . $curr_data[$rotationNum]['pub_age'] . ' </h5>, 
-                                        <h5 id="person-sex" class="ml-1 h3 text-white"> ' . $curr_data[$rotationNum]['pub_sex'] . ' </h5>
-                                    </div>
-                                    <p id="description" class="card-text h5 text-white"> ' . $curr_data[$rotationNum]['pub_desc'] . ' </p>
-                                    <div class="row">
-                                        <form name="form" method="GET" action="index.php">
-                                            <button type="submit" class=" btn btn-info btn-light m-2 p-3 " value="PASS" name="passBtn0" href="#" onclick="passUser()" style="border-style: solid; border-color: #c8d6e5; border-radius: 50%;">
-                                                <img src="images/cross.png" alt="" style="width: 50px;">
-                                            </button>
-                                            <button type="submit" class="btn btn-light m-2 p-3 " value="SMASH" name="smashBtn0" href="#" onclick="smashUser()" style="border-style: solid; border-color: #c8d6e5; border-radius: 50%;">
-                                                <img src="images/heart.png" alt="" style="width: 50px;">
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>   
-                                
-                                ';
                 }
             } else {
                 //dito pupunta pag walang nakita using filters (age range and sex)
-                $output .=  '
-                            <div class="card">
-                                <div class="row m-3" >
-                                <!-- Profile Info Start -->
-                                <div class="col-12 d-flex align-items-center justify-content-center"  style="background-color:#0ba8d3;">
-                                    <h5 id="person-age" class="h3 text-white"> No data found, try again tomorrow! </h5>   
-                                </div>
-                                <!-- Profile Info End -->
-                                </div>
-                            </div>
-                            ';
+                $output = "";
             }
         } else {
             $output = $conn->error;
         }
     }
-    
+    //dsa
+    if ($imageIndex == 1){ // first picture
+    $output .=  '
+                <img src="images/'. $image_array[0] .'" id="img1" class="matches-picture" alt="..." >
+                ';
+    } elseif ($imageIndex == 2){ // second picture
+    $output .=  '
+                <img src="images/'. $image_array[1] .'" id="img1" class="matches-picture" alt="..." >
+                ';
+    } elseif ($imageIndex == 3){ // third picture
+    $output .=  '
+                <img src="images/'. $image_array[2] .'" id="img1" class="matches-picture" alt="..." >
+                ';
+    } elseif ($imageIndex == 4){ // fourth picture
+    $output .=  '
+                <img src="images/'. $image_array[3] .'" id="img1" class="matches-picture" alt="..." >
+                ';
+    }
+
     echo $output;
 }
 ?>
