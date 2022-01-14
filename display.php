@@ -14,16 +14,16 @@ if(isset($_SESSION['userid'])) {
     $likedUsersEmail = array();
     $likedUsersID = array();
 
-    $sql5 = "SELECT * FROM users_profile WHERE email = '$email'";
-    $query5 = $conn->query($sql5);
-    while($row5 = $query5->fetch_assoc()) {
+    $idSql = "SELECT * FROM users_profile WHERE email = '$email'";
+    $idQuery = $conn->query($idSql);
+    while($row5 = $idQuery->fetch_assoc()) {
         $rotationNum = $row5['rotation'];
     }
 
-    $sql3 = "SELECT * FROM match_record WHERE unique_id1 = '$email' OR unique_id2 = '$email'";
-    $query3 = $conn->query($sql3);
+    $matchSql = "SELECT * FROM match_record WHERE unique_id1 = '$email' OR unique_id2 = '$email'";
+    $matchQuery = $conn->query($matchSql);
     $counter = 0;
-    while($row3 = $query3->fetch_assoc()) {
+    while($row3 = $matchQuery->fetch_assoc()) {
         if ($email == $row3['unique_id1']){
             $likedUsersEmail[$counter] = $row3['unique_id2'];
         } elseif ($email == $row3['unique_id2']){
@@ -33,16 +33,16 @@ if(isset($_SESSION['userid'])) {
     }
     $counter = 0;
     foreach ($likedUsersEmail as $likedEmail) {
-        $sql4 = "SELECT * FROM users_profile WHERE email = '$likedEmail'";
-        $query4 = $conn->query($sql4);
-        if(($row4 = $query4->fetch_assoc()) > 0) {
+        $likeSql = "SELECT * FROM users_profile WHERE email = '$likedEmail'";
+        $likeQuery = $conn->query($likeSql);
+        if(($row4 = $likeQuery->fetch_assoc()) > 0) {
             $likedUsersID[$counter] = $row4['pub_id'];
             $counter++;
         }
     }
-    $sql0 = "SELECT * FROM users_profile WHERE email = '$email'";
-    $query0 = $conn->query($sql0);
-    if(($row0 = $query0->fetch_assoc()) > 0) {
+    $emailSql = "SELECT * FROM users_profile WHERE email = '$email'";
+    $emailQuery = $conn->query($emailSql);
+    if(($row0 = $emailQuery->fetch_assoc()) > 0) {
         $userPubID = $row0['pub_id'];
         $implodedLikedUsersID = implode(", ",array_values($likedUsersID));
         if ($sex == "Everything"){
@@ -60,9 +60,9 @@ if(isset($_SESSION['userid'])) {
                         //
                     } else {
                         $curr_data[] = $row;
-                        $sql2 = "SELECT * FROM users_profile WHERE pub_id = '$id'";
-                        $query2 = $conn->query($sql2);
-                        if(($row2 = $query2->fetch_assoc()) > 0) {
+                        $idSql2 = "SELECT * FROM users_profile WHERE pub_id = '$id'";
+                        $idQuery2 = $conn->query($idSql2);
+                        if(($row2 = $idQuery2->fetch_assoc()) > 0) {
                             if ($counter == 0){
                                 $curr_id = $curr_data[0]['pub_id'];
                             }

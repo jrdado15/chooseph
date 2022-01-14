@@ -56,7 +56,7 @@
                     <i class="fas fa-ellipsis-v"></i>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#"><i class="far fa-edit"></i>  Edit Profile</a>
+                      <a class="dropdown-item" href="editprofile.php"><i class="far fa-edit"></i>  Edit Profile</a>
                       <a class="dropdown-item" href="logout.php?logout_id=<?php echo $_SESSION['userid']; ?>"><i class="fas fa-sign-out-alt"></i>  Logout</a>
                     </div>
                   </div>

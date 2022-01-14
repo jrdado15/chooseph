@@ -7,11 +7,6 @@
   }
   $name = $_SESSION['fname'];
   $email = $_SESSION['userid'];
-//   $check="SELECT * FROM users_profile WHERE email='$email' AND pub_id=0 LIMIT 1";
-//   if($conn->query($check)->num_rows == 0) {  
-//     header('location: index.php?min-age=18&max-age=70&sexSelect=Everything&btnSubmit=SUBMIT');
-//     exit();
-//   }
 
   //Gets you public id
   $idEmail = $_SESSION['userid'];

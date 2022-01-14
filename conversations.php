@@ -26,9 +26,9 @@
                         $imageArray = $imageRow;
                     }
                     $imageArray = explode(',', $imageArray['pub_img']);
-                    $sql2 = "SELECT * FROM users_profile WHERE email = '$matched_user'";
-                    $query2 = $conn->query($sql2);
-                    while($row2 = $query2->fetch_assoc()) {
+                    $matchSql = "SELECT * FROM users_profile WHERE email = '$matched_user'";
+                    $matchQuery = $conn->query($matchSql);
+                    while($row2 = $matchQuery->fetch_assoc()) {
                         $output .= '<a href="chat.php?chatid='. $row2['email'] .'">
                                         <div class="row align-items-center mb-3">
                                             <div class="col-4">
@@ -58,9 +58,9 @@
                         $imageArray = $imageRow;
                     }
                     $imageArray = explode(',', $imageArray['pub_img']);
-                    $sql2 = "SELECT * FROM users_profile WHERE email = '$matched_user'";
-                    $query2 = $conn->query($sql2);
-                    while($row2 = $query2->fetch_assoc()) {
+                    $matchSql = "SELECT * FROM users_profile WHERE email = '$matched_user'";
+                    $matchQuery = $conn->query($matchSql);
+                    while($row2 = $matchQuery->fetch_assoc()) {
                         $output .= '
                         <div class="sidebar-item">
                             <hr>

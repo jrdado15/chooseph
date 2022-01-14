@@ -39,8 +39,8 @@
       echo $conn->error;
     } else {
       $last_id = $conn->insert_id;
-      $sql2="UPDATE users_profile SET pub_id='$last_id' WHERE email='$email'";
-      if($conn->query($sql2)) {
+      $updateSql="UPDATE users_profile SET pub_id='$last_id' WHERE email='$email'";
+      if($conn->query($updateSql)) {
         for($i=0;$i<4;$i++) {
           $tmpFilePath = $_FILES['img']['tmp_name'][$i];
           if($tmpFilePath!="") {
