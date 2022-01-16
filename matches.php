@@ -4,6 +4,7 @@
         include_once "dbconfig.php";
         $userid = $_SESSION['userid'];
         $sql = "SELECT * FROM match_record WHERE unique_id2 = '$userid' AND match_status = 'unmatched'";
+        //Gets your matches list
         $query = $conn->query($sql);
         $output = "";
         if($query->num_rows == 0) {
@@ -24,7 +25,7 @@
                         $imageArray = explode(',', $row3['pub_img']);
                     }
                 }
-                
+                //Echoes this html code to index
                 $output .= '
                 <div class="sidebar-item">
                 <hr>

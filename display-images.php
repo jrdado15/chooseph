@@ -60,7 +60,7 @@ if(isset($_SESSION['userid'])) {
                 while($row = $result->fetch_assoc()) { 
                     $id = $row['pub_id'];
                     if (in_array($id, $likedUsersID)){
-                        //
+                        //do nothing
                     } else {
                         $curr_data[] = $row;
                         $sql2 = "SELECT * FROM users_profile WHERE pub_id = '$id'";
@@ -74,12 +74,12 @@ if(isset($_SESSION['userid'])) {
                         }
                     }
                 }
-                if ($counter <= $rotationNum){
+                if ($counter <= $rotationNum) {
                     $rotationNum  = $rotationNum - $counter;
                     $sql = "UPDATE users_profile SET rotation = $rotationNum WHERE email = '$email'";
                     if ($conn->query($sql)) { }
                 }
-                if ($counter == 0){
+                if ($counter == 0) {
                     //dito pupunta pag walang data
                     $output = "";
                 } else {

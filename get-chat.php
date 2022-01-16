@@ -7,6 +7,7 @@
         $output = "";
         $sql = "SELECT * FROM message_record LEFT JOIN users_profile ON users_profile.email = message_record.outgoing_msg_id WHERE (outgoing_msg_id = '$outgoing_id' AND incoming_msg_id = '$incoming_id') OR (outgoing_msg_id = '$incoming_id' AND incoming_msg_id = '$outgoing_id') ORDER BY msg_id";
         $query = $conn->query($sql);
+        //Gets real-time update to the conversation
         if($query->num_rows > 0) {
             while($row = $query->fetch_assoc()) {
                 if($row['outgoing_msg_id'] === $outgoing_id) {

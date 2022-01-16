@@ -1,6 +1,7 @@
 <?php
   session_start();
   include_once 'dbconfig.php';
+  //Restricts user from going back to login page if logged in
   if(!isset($_SESSION['userid'])) {
     header('location: login.php');
     exit();
@@ -8,14 +9,17 @@
   $name = $_SESSION['fname'];
   $email = $_SESSION['userid'];
   $check="SELECT * FROM users_profile WHERE email='$email' AND pub_id=0 LIMIT 1";
+  //Redirect to index if user exists
   if($conn->query($check)->num_rows == 0) {  
     header('location: index.php?min-age=18&max-age=70&sexSelect=Everything&btnSubmit=SUBMIT');
     exit();
   }
+  //If save button is clicked
   if(isset($_POST['saveButton'])) {
     $img = $_FILES['img']['name'];
     $imageName = array();
     $list = '';
+    //Randomized image filenames
     if($img[0]!='')
       $imageName[0] = "image_".rand(100000000,999999999).".png";
       $list .= $imageName[0];
@@ -35,6 +39,7 @@
     $sex = $_POST['sex'];
     $age = $_POST['age'];
     $sql="INSERT INTO public_record SET pub_name='$name', pub_desc='$bio', pub_sex='$sex', pub_age='$age', pub_img='$list'";
+    //Uploads to images folder
     if(!$conn->query($sql)) {
       echo $conn->error;
     } else {

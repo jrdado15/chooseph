@@ -1,6 +1,7 @@
 <?php
   session_start();
   include_once 'dbconfig.php';
+  //Restricts user from going back to login page if logged in
   if(!isset($_SESSION['userid'])) {
     header('location: login.php');
     exit();
@@ -8,7 +9,7 @@
   $name = $_SESSION['fname'];
   $email = $_SESSION['userid'];
 
-  //Gets you public id
+  //Gets your public id
   $idEmail = $_SESSION['userid'];
   $idSql="SELECT * FROM users_profile WHERE email = '$idEmail'";
   $idArray = array();
@@ -30,14 +31,15 @@
   //print_r($imageArray);
 
   $email = $_SESSION['userid'];
-//   $check="SELECT * FROM users_profile WHERE email='$email' AND pub_id=0 LIMIT 1";
+  //$check="SELECT * FROM users_profile WHERE email='$email' AND pub_id=0 LIMIT 1";
 
+  //If save button is clicked
   if(isset($_POST['saveButton'])) {
     $img = $_FILES['img']['name'];
     $imageName = array();
-    // if ($imageArray[0] != "") {
-    //     $img[0] = echo $imageArray[0];
-    // }
+    //if ($imageArray[0] != "") {
+    //    $img[0] = echo $imageArray[0];
+    //}
     $list = '';
     if($img[0] =='')
         $list .= $imageArray[0];
@@ -45,6 +47,7 @@
         $imageName[0] = "image_".rand(100000000,999999999).".png";
         $list .= $imageName[0];
     $list .= ',';
+    //Randomized image filenames
     if($img[1] =='')
         $list .= $imageArray[1];
     else
@@ -67,6 +70,7 @@
     $age = $_POST['age'];
 
     $sql="UPDATE public_record SET pub_name='$name', pub_desc='$bio', pub_sex='$sex', pub_age='$age', pub_img='$list' WHERE pub_id = '$imageId' ";
+    //Uploads to images folder
     if(!$conn->query($sql)) {
       echo $conn->error;
     } else {

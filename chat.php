@@ -1,12 +1,13 @@
 <?php
   session_start();
   include_once "dbconfig.php";
+  //Restricts user from going back to login page if logged in
   if(!isset($_SESSION['userid'])) {
     header("location: login.php");
     exit();
   }
 
-  //Gets you public id
+  //Gets your public id
   $idEmail = $_SESSION['userid'];
   $idSql="SELECT * FROM users_profile WHERE email = '$idEmail'";
   $idArray = array();

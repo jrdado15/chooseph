@@ -57,7 +57,7 @@ if(isset($_SESSION['userid'])) {
                 while($row = $result->fetch_assoc()) { 
                     $id = $row['pub_id'];
                     if (in_array($id, $likedUsersID)){
-                        //
+                        //do nothing
                     } else {
                         $curr_data[] = $row;
                         $idSql2 = "SELECT * FROM users_profile WHERE pub_id = '$id'";
@@ -90,9 +90,6 @@ if(isset($_SESSION['userid'])) {
                                 </div>
                                 ';
                 } else {
-                    $image_array = array();
-                    $image_array = explode(',', $curr_data[$rotationNum]['pub_img']);
-                    //print_r($image_array);
                     $output .=  '
                                 <div>
                                     <input type="hidden" id="person-id" value="' . $curr_id . '">

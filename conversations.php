@@ -4,13 +4,14 @@
         include_once "dbconfig.php";
         $userid = $_SESSION['userid'];
         $sql = "SELECT * FROM match_record WHERE (unique_id1 = '$userid' OR unique_id2 = '$userid') AND match_status = 'matched'";
+        //Gets your conversations list
         $query = $conn->query($sql);
         $output = "";
         if($query->num_rows == 0) {
             $output .= "No conversations";
         } elseif($query->num_rows > 0) {
             while($row = $query->fetch_assoc()) {
-                if ($row['unique_id1'] == $_SESSION['userid']){
+                if ($row['unique_id1'] == $_SESSION['userid']){ //If you are the one who has matched
                     $matched_user = $row['unique_id2'];
                     $idSql="SELECT * FROM users_profile WHERE email = '$matched_user'";
                     $idArray = array();
@@ -29,6 +30,7 @@
                     $matchSql = "SELECT * FROM users_profile WHERE email = '$matched_user'";
                     $matchQuery = $conn->query($matchSql);
                     while($row2 = $matchQuery->fetch_assoc()) {
+                        //Echoes this html code to index
                         $output .= '<a href="chat.php?chatid='. $row2['email'] .'">
                                         <div class="row align-items-center mb-3">
                                             <div class="col-4">
@@ -42,7 +44,7 @@
                                         </div>
                                     </a>';
                     } 
-                } elseif ($row['unique_id2'] == $_SESSION['userid']){
+                } elseif ($row['unique_id2'] == $_SESSION['userid']){ //If you are the one who has been matched
                     $matched_user = $row['unique_id1'];
                     $idSql="SELECT * FROM users_profile WHERE email = '$matched_user'";
                     $idArray = array();
@@ -61,6 +63,7 @@
                     $matchSql = "SELECT * FROM users_profile WHERE email = '$matched_user'";
                     $matchQuery = $conn->query($matchSql);
                     while($row2 = $matchQuery->fetch_assoc()) {
+                        //Echoes this html code to index
                         $output .= '
                         <div class="sidebar-item">
                             <hr>

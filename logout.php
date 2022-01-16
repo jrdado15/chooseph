@@ -3,6 +3,7 @@
     if(isset($_SESSION['userid'])){
         include_once "dbconfig.php";
         $logout_id = $conn->real_escape_string($_GET['logout_id']);
+        //If logout ID is sent
         if(isset($logout_id)){
             session_unset();
             session_destroy();
