@@ -195,6 +195,7 @@
                   <li data-target="#modalcarousel" data-slide-to="2"></li>
                   <li data-target="#modalcarousel" data-slide-to="3"></li>
                 </ol>
+                <!-- Image 1-4 placeholder -->
                 <div class="carousel-inner">
                   <div class="carousel-item active">
                     <img src="" id="mimg1" class="modal-picture" alt="..." style="">
@@ -321,13 +322,13 @@
 </html> 
 
 <?php
-  //set data
   if(isset($_GET['btnSubmit'])){
     echo "<script> setData(); </script>";
     echo "<script type='text/javascript' src='display.js'></script>";
     echo "<script type='text/javascript' src='display-images.js'></script>";
   }
 
+  //if user submits pass button, add +1 to rotation and reload page
   if (isset($_GET['passBtn0'])){
     $userEmail = $_SESSION['userid'];
     echo "<script> alert('Error updating record:'". $conn->error .") </script> " ;
@@ -345,6 +346,7 @@
     }
   }
 
+  //if user submits heart button, add +1 to rotation, indicate user liked current person, and reload page
   if(isset($_GET['smashBtn0'])){
     $userEmail = $_SESSION['userid'];
     $emailLiked = $_COOKIE['likedEmail'];
@@ -373,26 +375,26 @@
     }
   }  
 
+  //if user submits pass button on modal, remove that person on match record and reload page
   if(isset($_POST['passBtn1'])) {
     $userEmail = $_SESSION['userid'];
     $emailLiker =  $_COOKIE['email'];
     
     $sql = "DELETE FROM match_record WHERE unique_id1 = '$emailLiker' AND unique_id2 = '$userEmail'";
     if ($conn->query($sql)) {
-      //echo "<script> alert('Record updated successfully') </script>";
       header('location: index.php?min-age=18&max-age=70&sexSelect=Everything&btnSubmit=SUBMIT');
     } else {
       echo "<script> alert('Error updating record:'". $conn->error .") </script> " ;
     }
   }
   
+  //if user submits smash button on modal, change the relationship to matched and reload page
   if(isset($_POST['smashBtn1'])) {
     $userEmail = $_SESSION['userid'];
     $emailLiker =  $_COOKIE['email'];
     
     $sql = "UPDATE match_record SET match_status = 'matched' WHERE unique_id1 = '$emailLiker' AND unique_id2 = '$userEmail'";
     if ($conn->query($sql)) {
-      // echo "<script> alert('Record updated successfully') </script>";
       header('location: index.php?min-age=18&max-age=70&sexSelect=Everything&btnSubmit=SUBMIT');
     } else {
       echo "<script> alert('Error updating record:'". $conn->error .") </script> " ;
