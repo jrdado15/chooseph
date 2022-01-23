@@ -94,23 +94,29 @@ if(isset($_SESSION['userid'])) {
             $output = $conn->error;
         }
     }
-    //dsa
-    if ($imageIndex == 1){ // first picture
-    $output .=  '
-                <img src="images/'. $image_array[0] .'" id="img1" class="matches-picture" alt="..." >
-                ';
-    } elseif ($imageIndex == 2){ // second picture
-    $output .=  '
-                <img src="images/'. $image_array[1] .'" id="img1" class="matches-picture" alt="..." >
-                ';
-    } elseif ($imageIndex == 3){ // third picture
-    $output .=  '
-                <img src="images/'. $image_array[2] .'" id="img1" class="matches-picture" alt="..." >
-                ';
-    } elseif ($imageIndex == 4){ // fourth picture
-    $output .=  '
-                <img src="images/'. $image_array[3] .'" id="img1" class="matches-picture" alt="..." >
-                ';
+    
+    if(!empty($image_array[0])){    
+        if ($imageIndex == 1){ // first picture
+        $output .=  '
+                    <img src="images/'. $image_array[0] .'" id="img1" class="matches-picture" alt="..." >
+                    ';
+        } elseif ($imageIndex == 2){ // second picture
+        $output .=  '
+                    <img src="images/'. $image_array[1] .'" id="img1" class="matches-picture" alt="..." >
+                    ';
+        } elseif ($imageIndex == 3){ // third picture
+        $output .=  '
+                    <img src="images/'. $image_array[2] .'" id="img1" class="matches-picture" alt="..." >
+                    ';
+        } elseif ($imageIndex == 4){ // fourth picture
+        $output .=  '
+                    <img src="images/'. $image_array[3] .'" id="img1" class="matches-picture" alt="..." >
+                    ';
+        }
+    } else {
+        $output .=  '
+                    <img src="images/placeholder.png" id="img1" class="matches-picture" alt="..." >
+                    ';
     }
 
     echo $output;

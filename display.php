@@ -3,6 +3,7 @@ session_start();
 if(isset($_SESSION['userid'])) {
     include_once 'dbconfig.php';
 
+    //set variables
     $minAge = $_GET['minAge'];
     $maxAge = $_GET['maxAge'];
     $sex = $_GET['sex'];
@@ -14,12 +15,14 @@ if(isset($_SESSION['userid'])) {
     $likedUsersEmail = array();
     $likedUsersID = array();
 
+    //get rotation number
     $idSql = "SELECT * FROM users_profile WHERE email = '$email'";
     $idQuery = $conn->query($idSql);
     while($row5 = $idQuery->fetch_assoc()) {
         $rotationNum = $row5['rotation'];
     }
 
+    //get email of every user who liked or were liked by the user
     $matchSql = "SELECT * FROM match_record WHERE unique_id1 = '$email' OR unique_id2 = '$email'";
     $matchQuery = $conn->query($matchSql);
     $counter = 0;
@@ -32,6 +35,8 @@ if(isset($_SESSION['userid'])) {
         $counter++;
     }
     $counter = 0;
+
+    //get every liked email's public id from users_profile and store into an array
     foreach ($likedUsersEmail as $likedEmail) {
         $likeSql = "SELECT * FROM users_profile WHERE email = '$likedEmail'";
         $likeQuery = $conn->query($likeSql);
@@ -40,6 +45,8 @@ if(isset($_SESSION['userid'])) {
             $counter++;
         }
     }
+    
+    //get everyone where it fits the filter (age, sex), is not liked by the user, and did not like the user
     $emailSql = "SELECT * FROM users_profile WHERE email = '$email'";
     $emailQuery = $conn->query($emailSql);
     if(($row0 = $emailQuery->fetch_assoc()) > 0) {
@@ -77,7 +84,7 @@ if(isset($_SESSION['userid'])) {
                     if ($conn->query($sql)) { }
                 }
                 if ($counter == 0){
-                    //dito pupunta pag walang data
+                    //if no data was found
                     $output .=  '
                                 <div class="card">
                                     <div class="row m-3" >
@@ -90,6 +97,7 @@ if(isset($_SESSION['userid'])) {
                                 </div>
                                 ';
                 } else {
+                    //if one or more data is found
                     $output .=  '
                                 <div>
                                     <input type="hidden" id="person-id" value="' . $curr_id . '">
@@ -115,7 +123,7 @@ if(isset($_SESSION['userid'])) {
                                 ';
                 }
             } else {
-                //dito pupunta pag walang nakita using filters (age range and sex)
+                //if no users left because of filter
                 $output .=  '
                             <div class="card">
                                 <div class="row m-3" >
