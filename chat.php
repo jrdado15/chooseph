@@ -47,13 +47,10 @@
           <!-- Sidebar start -->
           <div class="col-3">
               <div class="card" style="width: 20rem; height: 100%">
-                <img src="images/<?php echo $imageArray[0];?>" id="userPic" class="profile-cover mt-2" alt="..." style="border-radius: 10px;">
-                <div class="card-body">
-                  <div class="row justify-content-center">
-                  <h5 class="card-title h2 mb-4"><?php echo $_SESSION['name']?></h5>  
+              <div class="profile-div">
                   <!-- Menu Dropdown Start -->
-                  <div class="dropdown mt-1 ml-1">
-                    <button class="btn btn-light" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <div class="topright dropdown mt-1 ml-1">
+                    <button class="btn btn-outline-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-ellipsis-v"></i>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -62,6 +59,12 @@
                     </div>
                   </div>
                   <!-- Menu Dropdown End -->
+              </div>
+                <img src="images/<?php echo $imageArray[0];?>" id="userPic" class="profile-cover mt-2" alt="..." style="border-radius: 10px;">
+                <div class="card-body">
+                  <div class="row justify-content-center">
+                  <h5 class="card-title h2 mb-4"><?php echo $_SESSION['name']?></h5>  
+
                   </div>
                   <div class="bg-primary border rounded text-white text-center m-2">
                     <p class="h5 mt-1">Conversations</p>

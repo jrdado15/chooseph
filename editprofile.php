@@ -116,11 +116,11 @@
                         <input  class="d-none" type="file" name="img[]" id="imageUpload2" accept="image/*">
                         </div> <br>
                         <div class="btn btn-outline-secondary btn-rounded m-2">
-                        <img  src="images\<?php if ($imageArray[2] != "") echo $imageArray[2]; else echo "addImage.png";?>" id="profileImage3" style="width:200px;">
+                        <img class="profile-cover" src="images\<?php if ($imageArray[2] != "") echo $imageArray[2]; else echo "addImage.png";?>" id="profileImage3" style="width:200px;">
                         <input class="d-none" type="file" name="img[]" id="imageUpload3" accept="image/*">
                         </div>
                         <div class="btn btn-outline-secondary btn-rounded m-2">
-                        <img  src="images\<?php if ($imageArray[3] != "") echo $imageArray[3]; else echo 'addImage.png';?>" id="profileImage4" style="width:200px;">
+                        <img  class="profile-cover" src="images\<?php if ($imageArray[3] != "") echo $imageArray[3]; else echo 'addImage.png';?>" id="profileImage4" style="width:200px;">
                         <input  class="d-none" type="file" name="img[]" id="imageUpload4" accept="image/*">
                         </div>
                         <p>  Bio: <input type="text" name="bio" value = "<?php echo $pub_rec['pub_desc'];?>" required><br></p>

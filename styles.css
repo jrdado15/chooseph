@@ -17,6 +17,7 @@ div {
     height: 30vh;
 }
 
+
 .sidebar-item:hover {
     background-color:  #a5b1c2;
 }
@@ -67,6 +68,13 @@ a:hover{
 .profile-cover {
     width:95%;
     height:20vh;
+    object-fit:cover;
+    object-position:50% 50%;
+}
+
+.profile-picture {
+    width:100%;
+    height:20vh;
     object-fit:contain;
     object-position:50% 50%;
 }
@@ -76,3 +84,18 @@ a:hover{
     height:40vh;
     object-fit:cover;
 }
+
+.profile-div {
+    position: relative;
+  }
+  
+.topright {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    font-size: 18px;
+  }
+
+  .vl {
+    border-left: 1px solid white;
+  }

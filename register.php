@@ -88,11 +88,11 @@
                         <input class="d-none" type="file" name="img[]" id="imageUpload2" accept="image/*" onchange="success()" required>
                         </div> <br>
                         <div class="btn btn-outline-secondary btn-rounded m-2">
-                        <img  src="images\addImage.png" id="profileImage3" style="width:200px;">
+                        <img   class="profile-cover" src="images\addImage.png" id="profileImage3" style="width:200px;">
                         <input class="d-none" type="file" name="img[]" id="imageUpload3" accept="image/*" onchange="success()" required>
                         </div>
                         <div class="btn btn-outline-secondary btn-rounded m-2">
-                        <img src="images\addImage.png" id="profileImage4" style="width:200px;">
+                        <img class="profile-cover" src="images\addImage.png" id="profileImage4" style="width:200px;">
                         <input class="d-none" type="file" name="img[]" id="imageUpload4" accept="image/*" onchange="success()" required>
                         </div>
                         <p>  Bio: <input type="text" name="bio" required><br></p>

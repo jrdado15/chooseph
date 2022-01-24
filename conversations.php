@@ -31,18 +31,20 @@
                     $matchQuery = $conn->query($matchSql);
                     while($row2 = $matchQuery->fetch_assoc()) {
                         //Echoes this html code to index
-                        $output .= '<a href="chat.php?chatid='. $row2['email'] .'">
+                        $output .= '
+                        <div class="sidebar-item">
+                        <a href="chat.php?chatid='. $row2['email'] .'">
                                         <div class="row align-items-center mb-3">
                                             <div class="col-4">
-                                                <span class="img-responsive">
-                                                    <img class="img-fluid rounded-circle z-depth-2" alt="" src="images/' . $imageArray[0] . '" data-holder-rendered="true">
-                                                </span>
+                                                    <img class="ml-4" style="height: 50px; border-radius: 10%;" alt="" src="images/' . $imageArray[0] . '" data-holder-rendered="true">
                                             </div>
                                             <div class="col-8">  
                                                 <h4 class="h4">'. $row2['first_name'] .'</h4>
                                             </div>
                                         </div>
-                                    </a>';
+                                    </a>
+                        </div>
+                        ';
                     } 
                 } elseif ($row['unique_id2'] == $_SESSION['userid']){ //If you are the one who has been matched
                     $matched_user = $row['unique_id1'];
@@ -70,9 +72,7 @@
                             <a href="chat.php?chatid='. $row2['email'] .'">
                                         <div class="row align-items-center mb-3">
                                             <div class="col-4">
-                                                <span class="img-responsive">
-                                                    <img class="img-fluid rounded-circle z-depth-2" alt="" src="images/' . $imageArray[0] . '" data-holder-rendered="true">
-                                                </span>
+                                              <img class="ml-4" style="height: 50px; border-radius: 10%;" alt="" src="images/' . $imageArray[0] . '" data-holder-rendered="true">    
                                             </div>
                                             <div class="col-8">  
                                                 <h4 class="h4">'. $row2['first_name'] .'</h4>

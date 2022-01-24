@@ -31,6 +31,17 @@ body{
   object-position:50% 50%;
 }
 
+.profile-div {
+  position: relative;
+}
+
+.topright {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  font-size: 18px;
+}
+
 .sidebar {
   height: 30vh;
 }

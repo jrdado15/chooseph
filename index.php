@@ -63,13 +63,11 @@
       <!-- SIDEBAR START -->
       <div class="col-3 mt-3">
       <div class="card" style="width: 20rem; height: 100%">
-        <img src="images/<?php echo $imageArray[0];?>" id="userPic" class="profile-cover mt-2" alt="..." style="border-radius: 10px;">
-        <div class="card-body">
-          <div class="row justify-content-center">
-          <h5 class="card-title h2 mb-4"><?php echo $_SESSION['name']?></h5>  
+        <div class="profile-div">
+          <img src="images/<?php echo $imageArray[0];?>" id="userPic" class="profile-picture mt-2" alt="..." style="border-radius: 10px;">
           <!-- Menu Dropdown Start -->
-          <div class="dropdown mt-1 ml-1">
-            <button class="btn btn-light" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="topright dropdown mt-1 ml-1">
+            <button class="btn btn-outline-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-ellipsis-v"></i>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -78,11 +76,15 @@
             </div>
           </div>
           <!-- Menu Dropdown End -->
+        </div>
+      <div class="card-body">
+          <div class="row justify-content-center">
+          <h5 class="card-title h2 mb-4"><?php echo $_SESSION['name']?></h5>  
+
           </div>
-          
           <div class="mb-2">
           <!-- Filter Start -->
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#filter" aria-expanded="false">
+            <button class="btn btn-primary" style="width: 100%" type="button" data-toggle="collapse" data-target="#filter" aria-expanded="false">
                 Filters
             </button>
             <div class="collapse" id="filter">
@@ -115,6 +117,7 @@
           
           <div class="btn-group d-flex" role="group" aria-label="...">
             <button id="conversations-toggle" type="button" class="btn btn-primary w-100">Conversations</button>
+            <div class="vl"></div>
             <button id="matches-toggle" type="button" class="btn btn-primary w-100">Matches</button>
           </div> 
           <!--START Users Conversations -->
@@ -131,7 +134,7 @@
       <!-- RIGHT PANEL START -->
         <div class="col-9 justify-content-center text-center relative-full-div">
         <div class="card">
-          <div class="row m-3" >
+          <div class="row">
           <!-- Profile Pictures Start -->
           <div class="col-6">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -181,14 +184,8 @@
     <div class="modal" tabindex="-1" id="matchesModal" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="person-name-modal">MissingNO</h5>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
           <div class="modal-body">
-            <div id="modalcarousel" class="carousel slide" data-ride="carousel">
+            <div id="modalcarousel" class="carousel slide profile-div" data-ride="carousel">
                 <ol class="carousel-indicators">
                   <li data-target="#modalcarousel" data-slide-to="0" class="active"></li>
                   <li data-target="#modalcarousel" data-slide-to="1"></li>
@@ -218,9 +215,15 @@
                   <span class="carousel-control-next-icon" aria-hidden="true"></span>
                   <span class="sr-only">Next</span>
                 </a>
+                <button type="button" class="close topright" data-bs-dismiss="modal" aria-label="Close">
+                  <span class="far fa-times-circle" style="color:white; font-size: 30px;"></span>
+                </button>
             </div>
-            <br>    
-            <p id="description-modal">???</p>
+            <br>
+            <div class="text-center">
+              <h5 class="modal-title" id="person-name-modal">MissingNO</h5>    
+              <p id="description-modal">???</p>
+            </div>
           </div>
           <div class="modal-footer">
               <form name="form" method="POST" action="index.php">
