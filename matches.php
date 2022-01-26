@@ -32,7 +32,7 @@
                 <a onclick="matchClicked('.$counter.')" data-bs-toggle="modal" data-bs-target="#matchesModal">
                     <div class="row align-items-center mb-3">
                         <div class="col-4">
-                            <img class="ml-4" style="height: 55px; width: 55px; object-fit:cover; border-radius: 50%;" alt="" src="images/' . $imageArray[0] . '" data-holder-rendered="true">
+                            <img class="ml-4 round-icon" alt="" src="images/' . $imageArray[0] . '" data-holder-rendered="true">
                         </div>
                         <div class="col-8">  
                             <input type="hidden" id="matchesEmail'.$counter.'" value="'. $matchedUserEmail .'">

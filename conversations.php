@@ -36,7 +36,7 @@
                         <a href="chat.php?chatid='. $row2['email'] .'">
                                         <div class="row align-items-center mb-3">
                                             <div class="col-4">
-                                                    <img class="ml-4" style="height: 55px; width: 55px; object-fit:cover; border-radius: 50%;" alt="" src="images/' . $imageArray[0] . '" data-holder-rendered="true">
+                                                    <img class="ml-4 round-icon" style="" alt="" src="images/' . $imageArray[0] . '" data-holder-rendered="true">
                                             </div>
                                             <div class="col-8">  
                                                 <h4 class="h4 ml-3">'. $row2['first_name'] .'</h4>
@@ -72,7 +72,7 @@
                             <a href="chat.php?chatid='. $row2['email'] .'">
                                         <div class="row align-items-center mb-3">
                                             <div class="col-4">
-                                              <img class="ml-4" style="height: 50px; border-radius: 10%;" alt="" src="images/' . $imageArray[0] . '" data-holder-rendered="true">    
+                                              <img class="ml-4 round-icon" alt="" src="images/' . $imageArray[0] . '" data-holder-rendered="true">    
                                             </div>
                                             <div class="col-8">  
                                                 <h4 class="h4">'. $row2['first_name'] .'</h4>
