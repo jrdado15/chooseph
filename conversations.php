@@ -75,7 +75,7 @@
                                               <img class="ml-4 round-icon" alt="" src="images/' . $imageArray[0] . '" data-holder-rendered="true">    
                                             </div>
                                             <div class="col-8">  
-                                                <h4 class="h4">'. $row2['first_name'] .'</h4>
+                                                <h4 class="h4 ml-3">'. $row2['first_name'] .'</h4>
                                             </div>
                                         </div>
                                     </a>

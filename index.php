@@ -91,11 +91,11 @@
               <div class="card card-body">
               <form name="form" method="GET" action="index.php">
                 <div class="input-group">
-                    <input id="min-age" name="min-age" class="form-control" type="text" placeholder="Default input">
+                    <input id="min-age" name="min-age" class="form-control" type="number" placeholder="Minimum" required>
                     <script type="text/javascript">
                       document.getElementById('min-age').value = '18';
                     </script>
-                    <input id="max-age" name="max-age" class="form-control" type="text" placeholder="Default input">
+                    <input id="max-age" name="max-age" class="form-control" type="number" placeholder="Maximum" required>
                     <script type="text/javascript">
                       document.getElementById('max-age').value = '70';
                     </script>

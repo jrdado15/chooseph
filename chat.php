@@ -105,7 +105,7 @@
                     }
                   ?>
                   <a href="index.php?min-age=18&max-age=70&sexSelect=Everything&btnSubmit=SUBMIT" class="back-icon"><i class="fas fa-arrow-left"></i></a>
-                  <img class="img-fluid rounded-circle z-depth-2" alt="" src="images/<?php echo $imageArray[0];?>" data-holder-rendered="true">
+                  <img class="round-icon" alt="" src="images/<?php echo $imageArray[0];?>" data-holder-rendered="true">
                   <div class="details">
                     <span><?php echo $row['first_name']. " " . $row['last_name'] ?></span>
                   </div>
