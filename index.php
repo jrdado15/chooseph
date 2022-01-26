@@ -171,12 +171,11 @@
           <!-- Profile Pictures End -->
           <!-- Profile Info Start -->
           <div class="display-info col-6 d-flex align-items-center justify-content-center"  style="background-color:#0ba8d3;">
-                
+          
           </div>
           <!-- Profile Info End -->
           </div>
-      </div>
-
+        </div>
         </div>
       <!-- RIGHT PANEL END --> 
 

@@ -108,7 +108,7 @@ if(isset($_SESSION['userid'])) {
                                         <h5 id="person-sex" class="ml-1 h3 text-white"> ' . $curr_data[$rotationNum]['pub_sex'] . ' </h5>
                                     </div>
                                     <p id="description" class="card-text h5 text-white"> ' . $curr_data[$rotationNum]['pub_desc'] . ' </p>
-                                    <div class="row">
+                                    <div class="row justify-content-center">
                                         <form name="form" method="GET" action="index.php">
                                             <button type="submit" class=" btn btn-info btn-light m-2 p-3 " value="PASS" name="passBtn0" href="#" onclick="passUser()" style="border-style: solid; border-color: #c8d6e5; border-radius: 50%;">
                                                 <img src="images/cross.png" alt="" style="width: 50px;">
