@@ -5,7 +5,7 @@
         $outgoing_id = $_SESSION['userid'];
         $incoming_id = $conn->real_escape_string($_POST['incoming_id']);
         $output = "";
-        $sql = "SELECT * FROM message_record LEFT JOIN users_profile ON users_profile.email = message_record.outgoing_msg_id WHERE (outgoing_msg_id = '$outgoing_id' AND incoming_msg_id = '$incoming_id') OR (outgoing_msg_id = '$incoming_id' AND incoming_msg_id = '$outgoing_id') ORDER BY msg_id";
+        $sql = "SELECT * FROM ods_message_record LEFT JOIN ods_users_profile ON ods_users_profile.email = ods_message_record.outgoing_msg_id WHERE (outgoing_msg_id = '$outgoing_id' AND incoming_msg_id = '$incoming_id') OR (outgoing_msg_id = '$incoming_id' AND incoming_msg_id = '$outgoing_id') ORDER BY msg_id";
         $query = $conn->query($sql);
         //Gets real-time update to the conversation
         if($query->num_rows > 0) {

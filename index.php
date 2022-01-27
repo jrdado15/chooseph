@@ -8,14 +8,14 @@
     exit();
   }
   $email = $_SESSION['userid'];
-  $check="SELECT * FROM users_profile WHERE email='$email' AND pub_id=0 LIMIT 1";
+  $check="SELECT * FROM ods_users_profile WHERE email='$email' AND pub_id=0 LIMIT 1";
   if($conn->query($check)->num_rows > 0) {
     header('location: register.php');
     exit();
   }
   //Gets your public id
   $idEmail = $_SESSION['userid'];
-  $idSql="SELECT * FROM users_profile WHERE email = '$idEmail'";
+  $idSql="SELECT * FROM ods_users_profile WHERE email = '$idEmail'";
   $idArray = array();
   $idQuery = $conn->query($idSql);
   while($idRow = $idQuery->fetch_assoc()) {
@@ -23,7 +23,7 @@
   }
   //Gets your image list
   $imageId = $idArray['pub_id'];
-  $imageSql="SELECT * FROM public_record WHERE pub_id = '$imageId'";
+  $imageSql="SELECT * FROM ods_public_record WHERE pub_id = '$imageId'";
   $imageArray = array();
   $imageQuery = $conn->query($imageSql);
   while($imageRow = $imageQuery->fetch_assoc()) {
@@ -335,13 +335,13 @@
   if (isset($_GET['passBtn0'])){
     $userEmail = $_SESSION['userid'];
     echo "<script> alert('Error updating record:'". $conn->error .") </script> " ;
-    $sql5 = "SELECT * FROM users_profile WHERE email = '$email'";
+    $sql5 = "SELECT * FROM ods_users_profile WHERE email = '$email'";
     $query5 = $conn->query($sql5);
     while($row5 = $query5->fetch_assoc()) {
       $rotationNum = $row5['rotation'];
     }
     $rotationNum++;
-    $sql = "UPDATE users_profile SET rotation = $rotationNum WHERE email = '$email'";
+    $sql = "UPDATE ods_users_profile SET rotation = $rotationNum WHERE email = '$email'";
     if ($conn->query($sql)) {
       header('location: index.php?min-age=18&max-age=70&sexSelect=Everything&btnSubmit=SUBMIT');
     } else {
@@ -354,20 +354,20 @@
     $userEmail = $_SESSION['userid'];
     $emailLiked = $_COOKIE['likedEmail'];
     echo "<script> alert('Error updating record:'". $conn->error .") </script> " ;
-    $sql5 = "SELECT * FROM users_profile WHERE email = '$email'";
+    $sql5 = "SELECT * FROM ods_users_profile WHERE email = '$email'";
     $query5 = $conn->query($sql5);
     while($row5 = $query5->fetch_assoc()) {
       $rotationNum = $row5['rotation'];
     }
     $rotationNum++;
-    $sql = "UPDATE users_profile SET rotation = $rotationNum WHERE email = '$email'";
+    $sql = "UPDATE ods_users_profile SET rotation = $rotationNum WHERE email = '$email'";
     if ($conn->query($sql)) {
       foreach($curr_data as $subKey => $subArray){
         if($subArray['pub_id'] == $emailLiked){
           unset($curr_data[$subKey]);
         }
       }
-      $sql = "INSERT INTO match_record(unique_id1, unique_id2, match_status) VALUES ('$userEmail', '$emailLiked', 'unmatched')";
+      $sql = "INSERT INTO ods_match_record(unique_id1, unique_id2, match_status) VALUES ('$userEmail', '$emailLiked', 'unmatched')";
       if ($conn->query($sql)) { 
         header('location: index.php?min-age=18&max-age=70&sexSelect=Everything&btnSubmit=SUBMIT');
       } else {
@@ -383,7 +383,7 @@
     $userEmail = $_SESSION['userid'];
     $emailLiker =  $_COOKIE['email'];
     
-    $sql = "DELETE FROM match_record WHERE unique_id1 = '$emailLiker' AND unique_id2 = '$userEmail'";
+    $sql = "DELETE FROM ods_match_record WHERE unique_id1 = '$emailLiker' AND unique_id2 = '$userEmail'";
     if ($conn->query($sql)) {
       header('location: index.php?min-age=18&max-age=70&sexSelect=Everything&btnSubmit=SUBMIT');
     } else {
@@ -396,7 +396,7 @@
     $userEmail = $_SESSION['userid'];
     $emailLiker =  $_COOKIE['email'];
     
-    $sql = "UPDATE match_record SET match_status = 'matched' WHERE unique_id1 = '$emailLiker' AND unique_id2 = '$userEmail'";
+    $sql = "UPDATE ods_match_record SET match_status = 'matched' WHERE unique_id1 = '$emailLiker' AND unique_id2 = '$userEmail'";
     if ($conn->query($sql)) {
       header('location: index.php?min-age=18&max-age=70&sexSelect=Everything&btnSubmit=SUBMIT');
     } else {

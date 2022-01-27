@@ -3,7 +3,7 @@
     if(isset($_SESSION['userid'])) {
         include_once "dbconfig.php";
         $userid = $_SESSION['userid'];
-        $sql = "SELECT * FROM match_record WHERE (unique_id1 = '$userid' OR unique_id2 = '$userid') AND match_status = 'matched'";
+        $sql = "SELECT * FROM ods_match_record WHERE (unique_id1 = '$userid' OR unique_id2 = '$userid') AND match_status = 'matched'";
         //Gets your conversations list
         $query = $conn->query($sql);
         $output = "";
@@ -13,21 +13,21 @@
             while($row = $query->fetch_assoc()) {
                 if ($row['unique_id1'] == $_SESSION['userid']){ //If you are the one who has matched
                     $matched_user = $row['unique_id2'];
-                    $idSql="SELECT * FROM users_profile WHERE email = '$matched_user'";
+                    $idSql="SELECT * FROM ods_users_profile WHERE email = '$matched_user'";
                     $idArray = array();
                     $idQuery = $conn->query($idSql);
                     while($idRow = $idQuery->fetch_assoc()) {
                         $idArray = $idRow;
                     }
                     $imageId = $idArray['pub_id'];
-                    $imageSql="SELECT * FROM public_record WHERE pub_id = '$imageId'";
+                    $imageSql="SELECT * FROM ods_public_record WHERE pub_id = '$imageId'";
                     $imageArray = array();
                     $imageQuery = $conn->query($imageSql);
                     while($imageRow = $imageQuery->fetch_assoc()) {
                         $imageArray = $imageRow;
                     }
                     $imageArray = explode(',', $imageArray['pub_img']);
-                    $matchSql = "SELECT * FROM users_profile WHERE email = '$matched_user'";
+                    $matchSql = "SELECT * FROM ods_users_profile WHERE email = '$matched_user'";
                     $matchQuery = $conn->query($matchSql);
                     while($row2 = $matchQuery->fetch_assoc()) {
                         //Echoes this html code to index
@@ -48,21 +48,21 @@
                     } 
                 } elseif ($row['unique_id2'] == $_SESSION['userid']){ //If you are the one who has been matched
                     $matched_user = $row['unique_id1'];
-                    $idSql="SELECT * FROM users_profile WHERE email = '$matched_user'";
+                    $idSql="SELECT * FROM ods_users_profile WHERE email = '$matched_user'";
                     $idArray = array();
                     $idQuery = $conn->query($idSql);
                     while($idRow = $idQuery->fetch_assoc()) {
                         $idArray = $idRow;
                     }
                     $imageId = $idArray['pub_id'];
-                    $imageSql="SELECT * FROM public_record WHERE pub_id = '$imageId'";
+                    $imageSql="SELECT * FROM ods_public_record WHERE pub_id = '$imageId'";
                     $imageArray = array();
                     $imageQuery = $conn->query($imageSql);
                     while($imageRow = $imageQuery->fetch_assoc()) {
                         $imageArray = $imageRow;
                     }
                     $imageArray = explode(',', $imageArray['pub_img']);
-                    $matchSql = "SELECT * FROM users_profile WHERE email = '$matched_user'";
+                    $matchSql = "SELECT * FROM ods_users_profile WHERE email = '$matched_user'";
                     $matchQuery = $conn->query($matchSql);
                     while($row2 = $matchQuery->fetch_assoc()) {
                         //Echoes this html code to index

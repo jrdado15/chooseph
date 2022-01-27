@@ -11,7 +11,7 @@
 
   //Gets your public id
   $idEmail = $_SESSION['userid'];
-  $idSql="SELECT * FROM users_profile WHERE email = '$idEmail'";
+  $idSql="SELECT * FROM ods_users_profile WHERE email = '$idEmail'";
   $idArray = array();
   $idQuery = $conn->query($idSql);
   while($idRow = $idQuery->fetch_assoc()) {
@@ -19,7 +19,7 @@
   }
   //Gets your image list
   $imageId = $idArray['pub_id'];
-  $imageSql="SELECT * FROM public_record WHERE pub_id = '$imageId'";
+  $imageSql="SELECT * FROM ods_public_record WHERE pub_id = '$imageId'";
   $imageArray = array();
   $imageQuery = $conn->query($imageSql);
   while($imageRow = $imageQuery->fetch_assoc()) {
@@ -69,7 +69,7 @@
     $sex = $_POST['sex'];
     $age = $_POST['age'];
 
-    $sql="UPDATE public_record SET pub_name='$name', pub_desc='$bio', pub_sex='$sex', pub_age='$age', pub_img='$list' WHERE pub_id = '$imageId' ";
+    $sql="UPDATE ods_public_record SET pub_name='$name', pub_desc='$bio', pub_sex='$sex', pub_age='$age', pub_img='$list' WHERE pub_id = '$imageId' ";
     //Uploads to images folder
     if(!$conn->query($sql)) {
       echo $conn->error;

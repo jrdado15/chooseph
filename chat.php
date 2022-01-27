@@ -9,7 +9,7 @@
 
   //Gets your public id
   $idEmail = $_SESSION['userid'];
-  $idSql="SELECT * FROM users_profile WHERE email = '$idEmail'";
+  $idSql="SELECT * FROM ods_users_profile WHERE email = '$idEmail'";
   $idArray = array();
   $idQuery = $conn->query($idSql);
   while($idRow = $idQuery->fetch_assoc()) {
@@ -17,7 +17,7 @@
   }
   //Gets your image list
   $imageId = $idArray['pub_id'];
-  $imageSql="SELECT * FROM public_record WHERE pub_id = '$imageId'";
+  $imageSql="SELECT * FROM ods_public_record WHERE pub_id = '$imageId'";
   $imageArray = array();
   $imageQuery = $conn->query($imageSql);
   while($imageRow = $imageQuery->fetch_assoc()) {
@@ -83,21 +83,21 @@
                 <header>
                   <?php
                     $chatid = $conn->real_escape_string($_GET['chatid']);
-                    $idSql="SELECT * FROM users_profile WHERE email = '$chatid'";
+                    $idSql="SELECT * FROM ods_users_profile WHERE email = '$chatid'";
                     $idArray = array();
                     $idQuery = $conn->query($idSql);
                     while($idRow = $idQuery->fetch_assoc()) {
                         $idArray = $idRow;
                     }
                     $imageId = $idArray['pub_id'];
-                    $imageSql="SELECT * FROM public_record WHERE pub_id = '$imageId'";
+                    $imageSql="SELECT * FROM ods_public_record WHERE pub_id = '$imageId'";
                     $imageArray = array();
                     $imageQuery = $conn->query($imageSql);
                     while($imageRow = $imageQuery->fetch_assoc()) {
                         $imageArray = $imageRow;
                     }
                     $imageArray = explode(',', $imageArray['pub_img']);
-                    $sql = $conn->query("SELECT * FROM users_profile WHERE email = '$chatid'");
+                    $sql = $conn->query("SELECT * FROM ods_users_profile WHERE email = '$chatid'");
                     if($sql->num_rows > 0) {
                       $row = $sql->fetch_assoc();
                     } else {

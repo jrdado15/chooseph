@@ -3,7 +3,7 @@
     if(isset($_SESSION['userid'])) {
         include_once "dbconfig.php";
         $userid = $_SESSION['userid'];
-        $sql = "SELECT * FROM match_record WHERE unique_id2 = '$userid' AND match_status = 'unmatched'";
+        $sql = "SELECT * FROM ods_match_record WHERE unique_id2 = '$userid' AND match_status = 'unmatched'";
         //Gets your matches list
         $query = $conn->query($sql);
         $output = "";
@@ -13,11 +13,11 @@
             $counter = 0;
             while($row = $query->fetch_assoc()) {
                 $matchedUserEmail = $row['unique_id1'];
-                $sql2 = "SELECT * FROM users_profile WHERE email = '$matchedUserEmail'";
+                $sql2 = "SELECT * FROM ods_users_profile WHERE email = '$matchedUserEmail'";
                 $query2 = $conn->query($sql2);
                 if(($row2 = $query2->fetch_assoc()) > 0) {
                     $pub_id = $row2['pub_id'];
-                    $sql3 = "SELECT * FROM public_record WHERE pub_id = '$pub_id'";
+                    $sql3 = "SELECT * FROM ods_public_record WHERE pub_id = '$pub_id'";
                     $query3 = $conn->query($sql3);
                     if(($row3 = $query3->fetch_assoc()) > 0) {
                         $publicName = $row3['pub_name'];
