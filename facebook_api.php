@@ -69,10 +69,10 @@
                 $fname = $fbUserInfo['fb_response']['first_name'];
                 $lname = $fbUserInfo['fb_response']['last_name'];   
                 //check if user is already signed up
-                $sql = "SELECT * FROM users_profile WHERE email='$email'";
+                $sql = "SELECT * FROM ods_users_profile WHERE email='$email'";
                 $rs = $conn->query($sql);
                 if(!mysqli_num_rows($rs) >= 1) {
-                    $sql = "INSERT INTO users_profile SET email='$email', first_name='$fname', last_name='$lname'";
+                    $sql = "INSERT INTO ods_users_profile SET email='$email', first_name='$fname', last_name='$lname'";
                     if(!$conn->query($sql)) {
                         echo $conn->error;//getting the error
                     }

@@ -8,7 +8,7 @@
   }
   $name = $_SESSION['fname'];
   $email = $_SESSION['userid'];
-  $check="SELECT * FROM users_profile WHERE email='$email' AND pub_id=0 LIMIT 1";
+  $check="SELECT * FROM ods_users_profile WHERE email='$email' AND pub_id=0 LIMIT 1";
   //Redirect to index if user exists
   if($conn->query($check)->num_rows == 0) {  
     header('location: index.php?min-age=18&max-age=70&sexSelect=Everything&btnSubmit=SUBMIT');
@@ -38,13 +38,13 @@
     $bio = $_POST['bio'];
     $sex = $_POST['sex'];
     $age = $_POST['age'];
-    $sql="INSERT INTO public_record SET pub_name='$name', pub_desc='$bio', pub_sex='$sex', pub_age='$age', pub_img='$list'";
+    $sql="INSERT INTO ods_public_record SET pub_name='$name', pub_desc='$bio', pub_sex='$sex', pub_age='$age', pub_img='$list'";
     //Uploads to images folder
     if(!$conn->query($sql)) {
       echo $conn->error;
     } else {
       $last_id = $conn->insert_id;
-      $updateSql="UPDATE users_profile SET pub_id='$last_id' WHERE email='$email'";
+      $updateSql="UPDATE ods_users_profile SET pub_id='$last_id' WHERE email='$email'";
       if($conn->query($updateSql)) {
         for($i=0;$i<4;$i++) {
           $tmpFilePath = $_FILES['img']['tmp_name'][$i];
