@@ -58,10 +58,10 @@
   <body>
     <!-- Hidden Data -->
     <input type="hidden" id="rotation" value=0>
-
-    <div class="row mt-3 container-fluid">
+    
+    <div class="row mt-3 mx-5">
       <!-- SIDEBAR START -->
-      <div class="col-3 mt-3">
+      <div class="col-3 mt-4">
       <div class="card" style="width: 20rem; height: 100%">
         <div class="profile-div">
           <img src="images/<?php echo $imageArray[0];?>" id="userPic" class="profile-picture mt-2" alt="..." style="border-radius: 10px;">
@@ -132,11 +132,11 @@
       <!-- SIDEBAR END -->
 
       <!-- RIGHT PANEL START -->
-        <div class="col-9 justify-content-center text-center relative-full-div">
+        <div class="col-9 mt-4 justify-content-center text-center">
         <div class="card">
           <div class="row">
           <!-- Profile Pictures Start -->
-          <div class="col-6">
+          <div class="col-6 px-0 mx-0">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
               <ol class="carousel-indicators">
                   <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -170,7 +170,7 @@
           </div>
           <!-- Profile Pictures End -->
           <!-- Profile Info Start -->
-          <div class="display-info col-6 d-flex align-items-center justify-content-center"  style="background-color:#0ba8d3;">
+          <div class="display-info col-6 d-flex align-items-center justify-content-center"  style="background-color:#0ba8d3; margin-left: -15px;">
           
           </div>
           <!-- Profile Info End -->

@@ -7,6 +7,7 @@ body, html{
 
 body {
     background-color: #9edef0;
+    overflow: hidden;
 }
 
 div {
@@ -34,7 +35,8 @@ a:hover{
 }
 
 .card {
-    background-color: #ffffff;  
+    background-color: #ffffff;
+    border-radius: 20px;  
 }
 
 .full-div {
